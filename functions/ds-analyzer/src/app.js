@@ -33,7 +33,38 @@ app.use(
     crossOriginResourcePolicy: { policy: 'cross-origin' },
   })
 );
-app.use(cors({ origin: true, credentials: false }));
+// CORS — allow any origin that may host the SPA.
+// In production the SPA runs on Catalyst Slate (*.onslate.in) which is a
+// different origin from the function (*.catalystserverless.com), so we must
+// send explicit CORS headers on every response including preflight OPTIONS.
+//
+// CORS_ALLOWED_ORIGINS (comma-separated) can be set in the Catalyst function
+// env to restrict to known origins.  If unset, all origins are allowed (safe
+// for a read-only public API; tighten if you add auth).
+const rawAllowed = process.env.CORS_ALLOWED_ORIGINS || '';
+const allowedOrigins = rawAllowed
+  .split(',')
+  .map(o => o.trim())
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin:
+      allowedOrigins.length > 0
+        ? (origin, callback) => {
+            // Allow server-to-server (no Origin header) and listed origins.
+            if (!origin || allowedOrigins.includes(origin)) {
+              callback(null, true);
+            } else {
+              callback(new Error(`CORS: origin ${origin} not allowed`));
+            }
+          }
+        : true, // allow all origins when env var is not set
+    credentials: false,
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Accept'],
+  })
+);
 app.use(express.json({ limit: '1mb' }));
 
 // Basic DoS protection on the public analyze endpoint.

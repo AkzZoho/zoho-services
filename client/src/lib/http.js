@@ -125,16 +125,24 @@ export async function parseJsonResponse(res) {
  */
 function resolveApiBase() {
   // 1. Explicit build-time override — highest priority.
-  //    Set VITE_API_BASE in the Slate / CI build environment to the full
-  //    function URL when the SPA and function are on different origins.
-  const buildTimeBase =
+  //    Set VITE_API_BASE in a .env file before running `npm run build`.
+  //    Must be the full function URL including https:// scheme.
+  //    e.g. VITE_API_BASE=https://ds-analyser.catalystserverless.com/server/ds-analyzer
+  let buildTimeBase =
     typeof import.meta !== 'undefined' &&
     import.meta.env &&
     import.meta.env.VITE_API_BASE
       ? import.meta.env.VITE_API_BASE.replace(/\/+$/, '')
       : '';
 
-  if (buildTimeBase) return buildTimeBase;
+  if (buildTimeBase) {
+    // Auto-fix: if the env var was set without a scheme (e.g. just the
+    // hostname), prepend https:// so the URL is always absolute.
+    if (!/^https?:\/\//i.test(buildTimeBase)) {
+      buildTimeBase = `https://${buildTimeBase}`;
+    }
+    return buildTimeBase;
+  }
 
   // 2. Runtime detection — Catalyst web-client hosting.
   //    When running in a browser (not SSR / test) and not on localhost,
