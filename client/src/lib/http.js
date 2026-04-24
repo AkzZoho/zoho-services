@@ -100,16 +100,45 @@ export async function parseJsonResponse(res) {
 }
 
 /**
+ * Resolve the correct API base URL for the current runtime.
+ *
+ *   · Dev (Vite at :8080)       → '' (relative) → Vite proxy forwards /api
+ *                                  and /health to http://localhost:3001.
+ *   · Catalyst hosted frontend  → '/server/ds-analyzer' so requests resolve
+ *                                  to the Advanced I/O function mount point
+ *                                  (https://<proj>.catalystserverless.com
+ *                                   /server/ds-analyzer/api/inspect).
+ *
+ * Detection rule: any non-localhost hostname is treated as a hosted
+ * deployment. This keeps local builds (`vite preview`) working too.
+ */
+function resolveApiBase() {
+  if (typeof window === 'undefined') return '';
+  const { hostname } = window.location;
+  const isLocal =
+    hostname === 'localhost' ||
+    hostname === '127.0.0.1' ||
+    hostname === '0.0.0.0' ||
+    hostname.endsWith('.local');
+  return isLocal ? '' : '/server/ds-analyzer';
+}
+
+const API_BASE = resolveApiBase();
+
+/**
  * Small convenience wrapper mirroring the previous `api()` helper pattern
- * used across the client. Centralises network + parse error handling.
+ * used across the client. Centralises network + parse error handling and
+ * automatically prefixes API paths with the environment-correct base.
  */
 export async function apiFetch(path, opts = {}) {
+  // Absolute URLs are passed through unchanged; relative paths get the base.
+  const url = /^https?:\/\//i.test(path) ? path : `${API_BASE}${path}`;
   let res;
   try {
-    res = await fetch(path, opts);
+    res = await fetch(url, opts);
   } catch (networkErr) {
     // TypeError: Failed to fetch / NetworkError — keep it short and actionable.
-    throw new Error(`Network error contacting ${path}: ${networkErr.message}`);
+    throw new Error(`Network error contacting ${url}: ${networkErr.message}`);
   }
   return parseJsonResponse(res);
 }

@@ -234,4 +234,98 @@ describe('Route reachability & JSON contract', () => {
     expect(res.headers['content-type']).toMatch(JSON_CT);
     expect(res.text).not.toMatch(/<!doctype html>|<html/i);
   });
+
+  // ---- Catalyst Advanced I/O prefix: /server/ds-analyzer/* ---------------
+  //
+  // Catalyst mounts Advanced I/O functions at /server/<function-name>/* and
+  // passes the FULL path to Express (it does NOT strip the prefix). Every
+  // route reachable at /api/... MUST also be reachable at
+  // /server/ds-analyzer/api/... for production Slate deployments.
+
+  test('GET /server/ds-analyzer/health is reachable and returns JSON 200 (Catalyst prefix)', async () => {
+    const res = await request(app).get('/server/ds-analyzer/health');
+    expect(res.status).toBe(200);
+    expect(res.headers['content-type']).toMatch(JSON_CT);
+    expect(res.body).toEqual(expect.objectContaining({ status: 'ok' }));
+  });
+
+  test('POST /server/ds-analyzer/api/inspect is reachable (not 404) and returns JSON 400 when file missing (Catalyst prefix)', async () => {
+    const res = await request(app).post('/server/ds-analyzer/api/inspect');
+    expect(res.status).toBe(400);
+    expect(res.status).not.toBe(404);
+    expect(res.headers['content-type']).toMatch(JSON_CT);
+    expect(res.body).toEqual(
+      expect.objectContaining({ error: expect.stringMatching(/ds/i) })
+    );
+  });
+
+  test('POST /server/ds-analyzer/api/inspect returns JSON 200 for a valid .ds (Catalyst prefix)', async () => {
+    const res = await request(app)
+      .post('/server/ds-analyzer/api/inspect')
+      .attach('ds', buildMinimalDs(), 'app.ds');
+
+    expect(res.status).toBe(200);
+    expect(res.headers['content-type']).toMatch(JSON_CT);
+    expect(res.body.ok).toBe(true);
+    expect(res.body).toHaveProperty('technicalScope');
+    expect(Array.isArray(res.body.technicalScope.forms)).toBe(true);
+  });
+
+  test('POST /server/ds-analyzer/api/inspect rejects unsupported extension (Catalyst prefix)', async () => {
+    const res = await request(app)
+      .post('/server/ds-analyzer/api/inspect')
+      .attach('ds', Buffer.from('data'), 'notes.txt');
+
+    expect(res.status).toBe(400);
+    expect(res.headers['content-type']).toMatch(JSON_CT);
+    expect(res.body.error).toMatch(/Unsupported file type/i);
+  });
+
+  test('POST /server/ds-analyzer/api/analyze is reachable (not 404) when files missing (Catalyst prefix)', async () => {
+    const res = await request(app).post('/server/ds-analyzer/api/analyze');
+    expect(res.status).toBe(400);
+    expect(res.status).not.toBe(404);
+    expect(res.headers['content-type']).toMatch(JSON_CT);
+    expect(res.body).toHaveProperty('error');
+  });
+
+  test('Unknown Catalyst-prefixed route returns JSON 404 (not HTML)', async () => {
+    const res = await request(app).get('/server/ds-analyzer/api/does-not-exist');
+    expect(res.status).toBe(404);
+    expect(res.headers['content-type']).toMatch(JSON_CT);
+    expect(res.text).not.toMatch(/<!doctype html>|<html/i);
+  });
+
+  // ---- Helmet / CORS security headers ------------------------------------
+  //
+  // Every response (success AND error) must carry the correct security
+  // headers so Catalyst's CDN doesn't strip or override them in a way
+  // that breaks the SPA. These are regression tests — any accidental
+  // helmet mis-configuration will be caught here before it reaches prod.
+
+  test('Success response includes X-Content-Type-Options: nosniff', async () => {
+    const res = await request(app).get('/health');
+    expect(res.headers['x-content-type-options']).toBe('nosniff');
+  });
+
+  test('Error response includes X-Content-Type-Options: nosniff', async () => {
+    const res = await request(app).post('/api/inspect');
+    expect(res.headers['x-content-type-options']).toBe('nosniff');
+  });
+
+  test('CSP header is present and allows data: URIs for img-src', async () => {
+    const res = await request(app).get('/health');
+    const csp = res.headers['content-security-policy'] || '';
+    expect(csp).toBeTruthy();
+    // The inline SVG favicon uses a data: URI — must be whitelisted in img-src.
+    expect(csp).toMatch(/img-src[^;]*data:/);
+  });
+
+  test('CORS header is present for cross-origin requests', async () => {
+    const res = await request(app)
+      .get('/health')
+      .set('Origin', 'https://ds-analyser-hhpiionw.onslate.in');
+    // Access-Control-Allow-Origin should reflect the origin or be *.
+    expect(res.headers['access-control-allow-origin']).toBeTruthy();
+  });
 });

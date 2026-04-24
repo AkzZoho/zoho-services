@@ -10,8 +10,29 @@ const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
+// Trust the first proxy hop (Catalyst's load-balancer) so that
+// express-rate-limit sees the real client IP via X-Forwarded-For,
+// rather than the internal proxy address (which would bucket all
+// users under the same IP and exhaust the rate limit instantly).
+app.set('trust proxy', 1);
+
 // --- Security middleware ---
-app.use(helmet());
+// helmet defaults are sensible, but we need two overrides:
+//   1. CSP: allow `data:` URIs for the inline SVG favicon in index.html.
+//   2. Cross-Origin-Resource-Policy: "cross-origin" lets Catalyst's CDN
+//      serve the static assets from a different origin than the API.
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        // Allow the inline SVG favicon (data: URI in <link rel="icon">)
+        'img-src': ["'self'", 'data:'],
+      },
+    },
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+  })
+);
 app.use(cors({ origin: true, credentials: false }));
 app.use(express.json({ limit: '1mb' }));
 
@@ -31,13 +52,22 @@ const analyzeLimiter =
       });
 
 // --- Routes ---
-app.use('/health', healthRoute);
-app.use('/api/inspect', analyzeLimiter, inspectRoute);
-app.use('/api/analyze', analyzeLimiter, analyzeRoute);
+// Catalyst Advanced I/O mounts functions at `/server/<function-name>/*`,
+// so the URL arriving at Express is e.g. `/server/ds-analyzer/api/inspect`.
+// Locally (and through Vite's proxy) the same route is reached as `/api/inspect`.
+// We register an Express Router with all routes once, then mount it at BOTH
+// paths so the function works in every environment without path rewriting.
+const apiRouter = express.Router();
+apiRouter.use('/health', healthRoute);
+apiRouter.use('/api/inspect', analyzeLimiter, inspectRoute);
+apiRouter.use('/api/analyze', analyzeLimiter, analyzeRoute);
+
+app.use('/', apiRouter);                      // local / proxied dev
+app.use('/server/ds-analyzer', apiRouter);    // Catalyst production prefix
 
 // --- 404 ---
 app.use((req, res) => {
-  res.status(404).json({ error: 'Not found', path: req.path });
+  res.status(404).json({ error: 'Not found', path: req.originalUrl });
 });
 
 // --- Central error handler ---
