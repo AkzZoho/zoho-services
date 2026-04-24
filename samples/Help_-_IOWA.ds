@@ -1,0 +1,2541 @@
+/*
+ * Author       : girimservices_in_zohotest
+ * Generated on : 16-Jun-2025 23:38:00
+ * Version      : 1.0
+ */
+ application "Help - IOWA"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Asia/Kolkata"
+ 	time format = "24-hr"
+ 	forms
+	{
+		form Employee
+		{
+			success message = "Employee Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Name
+			(
+    			type = name
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Epayment_Setup_Request
+		{
+			displayname = "Epayment Setup Request"
+			success message = "Epayment Setup Request Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Agency
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Choice 1","Choice 2","Choice 3"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Functionality_needed
+			(
+				type = radiobuttons
+				displayname = "Functionality needed?"
+				maxchar = 100
+				values = {"Add new service","Add product to existing service"}
+				layout = 2
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Biller_ID
+			(
+    			type = text
+				displayname = "Biller ID"
+				maxchar = 3
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Application_ID
+			(
+				type = number
+				displayname = "Application ID"
+				maxchar = 3
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Name_of_Application
+			(
+    			type = text
+				displayname = "Name of Application"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Products
+			(
+				type = grid
+				displayname = "Products:"
+				values  = Products.ID
+    			bidirectional = Epayment_Setup_Request
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Section1
+			(
+				type = section
+				displayname = "Section"
+	 			row = 3
+	 			column = 0   
+				width = medium
+			)
+			eDAS_Billing_Code
+			(
+    			type = text
+				displayname = "eDAS Billing Code"
+				maxchar = 4
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			The_1_50_fees_to_be_paid_by
+			(
+				type = radiobuttons
+				displayname = "The $1.50 fees to be paid by?"
+				maxchar = 100
+				values = {"Agency","Lowan"}
+				layout = 2
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Credit_card_charges_to
+			(
+				type = radiobuttons
+				displayname = "Credit card charges to?"
+				maxchar = 100
+				values = {"Agency","Lowan"}
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Additional_comments
+			(
+    			type = textarea
+				displayname = "Additional comments"
+				height = 100px
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Firewall_Conduit_ACL_Requirements
+		{
+			displayname = "Firewall Conduit/ACL Requirements"
+			success message = "Firewall Conduit/acl Requirement Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Source
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Destination_IP_s
+			(
+    			type = text
+				displayname = "Destination IP's"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Destination_Ports
+			(
+    			type = text
+				displayname = "Destination Ports"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form New_Server_Setup
+		{
+			displayname = "New Server Setup"
+			success message = "New Server Setup Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Requester
+			(
+				type = picklist	
+				values  = Employee.ID
+    			displayformat = [" " + Name.prefix + " " + Name.first_name + " " + Name.last_name + " " + Name.suffix]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Agency
+			(
+				type = picklist	
+				values  = Service_Catalog_Request.ID
+    			displayformat = [Department]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Project_Name
+			(
+    			type = text
+				displayname = "Project Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Project_Manager_Name
+			(
+    			type = text
+				displayname = "Project Manager Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Project_Manager_Contact
+			(
+    			type = phonenumber
+				displayname = "Project Manager Contact"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Describe_the_project_the_server_will_be_used_for
+			(
+    			type = textarea
+				displayname = "Describe the project the server will be used for"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have eDas_Billing_Code
+			(
+    			type = text
+				displayname = "eDas Billing Code"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Requested_Completion_Date
+			(
+    			type = date
+				displayname = "Requested Completion Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Operating_System_Type
+			(
+				type = picklist
+				displayname = "Operating System Type"
+				maxchar = 100
+				values = {"Redhat Enterprise Linux","Windows"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Active_Directory_Domain
+			(
+    			type = text
+				displayname = "Active Directory Domain"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Please_explain_if_the_current_version_of_the_OS_can_t_be_used_or_if_you_selected_other
+			(
+    			type = text
+				displayname = "Please explain if the current version of the OS can't be used or if you selected other."
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have CPU_Count_1_16
+			(
+    			type = text
+				displayname = "CPU Count (1-16)"
+    			description
+    			[
+    				type = help_text
+    			 	message = "Enter the socket and core requirement if known."
+    			]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Memory_GB
+			(
+    			type = text
+				displayname = "Memory (GB)"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Disk_space_needed_for_application_and_data
+			(
+    			type = text
+				displayname = "Disk space needed for application and data"
+    			description
+    			[
+    				type = help_text
+    			 	message = "If there are other disk requirements such as separate disks and system partitions please explain"
+    			]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have What_environment_should_this_server_be_created_for
+			(
+				type = picklist
+				displayname = "What environment should this server be created for?"
+				maxchar = 100
+				values = {"Production","Test","Development"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Data_Retention_Requirements
+			(
+    			type = text
+				displayname = "Data Retention Requirements"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Does_this_server_need_to_be_backed_up
+			(
+				type = radiobuttons
+				displayname = "Does this server need to be backed up?"
+				maxchar = 100
+				values = {"Yes","No"}
+				layout = 2
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Network_VLAN_ID_if_known
+			(
+    			type = text
+				displayname = "Network VLAN ID (if known)"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Technical_Point_of_Contact_for_the_project
+			(
+    			type = text
+				displayname = "Technical Point of Contact for the project"
+    			description
+    			[
+    				type = help_text
+    			 	message = "Enter the name of the person who is the Technical Point of Contact"
+    			]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Contact_Email
+			(
+    			type = email
+				displayname = "Contact Email"
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Contact_Phone_Number
+			(
+    			type = phonenumber
+				displayname = "Contact Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Developer_Contact_for_the_project
+			(
+    			type = text
+				displayname = "Developer Contact for the project"
+    			description
+    			[
+    				type = help_text
+    			 	message = "Enter the name of the person who is the Developer Contact"
+    			]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Contact_Email_developer
+			(
+    			type = email
+				displayname = "Contact Email"
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Contact_Phone_Number_developer
+			(
+    			type = phonenumber
+				displayname = "Contact Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Is_there_sensitive_data_involved
+			(
+				type = radiobuttons
+				displayname = "Is there sensitive data involved?"
+				maxchar = 100
+				values = {"Yes","No"}
+				layout = 2
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Please_explain_the_type_of_sensitive_data_involved
+			(
+    			type = text
+				displayname = "Please explain the type of sensitive data involved."
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Describe_the_applications_or_services_that_will_be_hosted_on_the_server
+			(
+    			type = textarea
+				displayname = "Describe the applications or services that will be hosted on the server."
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have List_all_accounts_requiring_administrative_server_access
+			(
+    			type = textarea
+				displayname = "List all accounts requiring administrative server access"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Other_users_that_need_to_have_access_to_the_server
+			(
+    			type = text
+				displayname = "Other users that need to have access to the server"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Firewall_Conduit_ACL_Requirements
+			(
+				type = grid
+				displayname = "Firewall Conduit/ACL Requirements"
+				values  = Firewall_Conduit_ACL_Requirements.ID
+    			description
+    			[
+    				type = help_text
+    			 	message = "If this is a replacement server, please give more details about the ACL's in Additional Requirements."
+    			]
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Section1
+			(
+				type = section
+				displayname = "Section"
+	 			row = 3
+	 			column = 0   
+				width = medium
+			)
+			Additional_Requirements
+			(
+    			type = text
+				displayname = "Additional Requirements"
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			must have Desired_Hostname
+			(
+    			type = text
+				displayname = "Desired Hostname"
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Attach_additional_requirements_from_Vendor
+			(
+    			type = upload file
+				displayname = "Attach additional requirements from Vendor"
+    			file count = 10
+				browse = local_drive
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Operating_System_Type
+		{
+			displayname = "Operating System Type"
+			success message = "Operating System Type Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Operating_System_Type
+			(
+    			type = text
+				displayname = "Operating System Type"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Products
+		{
+			success message = "Product Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Epayment_Setup_Request
+			(
+				type = picklist	
+				displayname = "Epayment Setup Request"
+				values  = Epayment_Setup_Request.ID
+    			bidirectional = Products
+    			displayformat = [ID]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Product_Title
+			(
+    			type = text
+				displayname = "Product Title"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Anticipated_Annual_Volume
+			(
+    			type = text
+				displayname = "Anticipated Annual Volume"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Agency_Code
+			(
+				type = number
+				displayname = "Agency Code"
+				maxchar = 3
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Revenue
+			(
+				type = INR
+				format = commadotindian
+				decimalplace = 0
+				maxchar = 4
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Fund
+			(
+    			type = text
+				maxchar = 4
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Organization
+			(
+    			type = text
+				maxchar = 4
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Unit_Code
+			(
+    			type = text
+				displayname = "Unit Code"
+				maxchar = 4
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Subunit_Code
+			(
+				type = number
+				displayname = "Subunit Code"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Request_Support
+		{
+			displayname = "Request Support"
+			captcha = true
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have First_Name
+			(
+    			type = text
+				displayname = "First Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Last_Name
+			(
+    			type = text
+				displayname = "Last Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Email
+			(
+    			type = email
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Phone_Number
+			(
+    			type = phonenumber
+				displayname = "Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			must have Description
+			(
+    			type = textarea
+				height = 100px
+    			description
+    			[
+    				type = help_text
+    			 	message = "Provide a detailed description of your request including the application or web address you are trying to access, if applicable."
+    			]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			plain
+			(
+    			type = plaintext
+				value = "<div>Please Note :&nbsp;<br /><br />After this request is submitted, you will receive a confirmation email from the State of Iowa Service Desk. If you have images or additional information to provide, reply to the State of Iowa Service Desk email with your attachments and this information will be automatically added to your request.<br /></div>"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Search
+		{
+			store data in zc = false
+			success message = ""
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			How_can_we_help
+			(
+    			type = text
+				displayname = "How can we help?"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+		}
+		form Service_Catalog_Request
+		{
+			displayname = "Service Catalog Request"
+			success message = "Service Catalog Request Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have Department
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Division
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Primary_Contact_Name
+			(
+    			type = phonenumber
+				displayname = "Primary Contact Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Phone_Number
+			(
+    			type = phonenumber
+				displayname = "Phone"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Supporting_Images
+		{
+			displayname = "Supporting Images"
+			success message = "Image Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Image
+			(
+    			type = image
+				source  = file
+				aspect ratio = original
+				camera = primary
+				show gallery = true
+				switch camera = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			ImageID
+			(
+				type = number
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		default list Request_Support_Report
+		{
+			displayName = "Request Support Report"
+			show all rows from Request_Support    
+			(
+				First_Name as "First Name"
+				Last_Name as "Last Name"
+				Email
+				Phone_Number as "Phone Number"
+				(
+					displayformat = plainnumber 
+					linktodial = enable
+				)
+				Description
+			)
+		}
+		default list All_Images
+		{
+			displayName = "All Images"
+			show all rows from Supporting_Images    
+			(
+				Image
+				ImageID
+			)
+		}
+		default list All_Epayment_Setup_Requests
+		{
+			displayName = "All Epayment Setup Requests"
+			show all rows from Epayment_Setup_Request    
+			(
+				Agency
+				Functionality_needed as "Functionality needed?"
+				Biller_ID as "Biller ID"
+				Application_ID as "Application ID"
+				Name_of_Application as "Name of Application"
+				eDAS_Billing_Code as "eDAS Billing Code"
+				The_1_50_fees_to_be_paid_by as "The $1.50 fees to be paid by?"
+				Credit_card_charges_to as "Credit card charges to?"
+				Additional_comments as "Additional comments"
+			)
+		}
+		default list All_Products
+		{
+			displayName = "All Products"
+			show all rows from Products    
+			(
+				Product_Title as "Product Title"
+				Anticipated_Annual_Volume as "Anticipated Annual Volume"
+				Agency_Code as "Agency Code"
+				Revenue
+				Fund
+				Organization
+				Unit_Code as "Unit Code"
+				Subunit_Code as "Subunit Code"
+				Epayment_Setup_Request as "Epayment Setup Request"
+			)
+		}
+		default list All_Service_Catalog_Requests
+		{
+			displayName = "All Service Catalog Requests"
+			show all rows from Service_Catalog_Request    
+			(
+				Department
+				Division
+				Primary_Contact_Name as "Primary Contact Name"
+				(
+					displayformat = plainnumber 
+					linktodial = enable
+				)
+				Phone_Number as "Phone"
+				(
+					displayformat = plainnumber 
+					linktodial = enable
+				)
+			)
+		}
+		default list All_New_Server_Setups
+		{
+			displayName = "All New Server Setups"
+			show all rows from New_Server_Setup    
+			(
+				Requester
+				Agency
+				Project_Name as "Project Name"
+				Project_Manager_Name as "Project Manager Name"
+				Project_Manager_Contact as "Project Manager Contact"
+				(
+					displayformat = plainnumber 
+					linktodial = enable
+				)
+				Describe_the_project_the_server_will_be_used_for as "Describe the project the server will be used for"
+				eDas_Billing_Code as "eDas Billing Code"
+				Requested_Completion_Date as "Requested Completion Date"
+				Active_Directory_Domain as "Active Directory Domain"
+				Please_explain_if_the_current_version_of_the_OS_can_t_be_used_or_if_you_selected_other as "Please explain if the current version of the OS can't be used or if you selected other."
+				CPU_Count_1_16 as "CPU Count (1-16)"
+				Memory_GB as "Memory (GB)"
+				Disk_space_needed_for_application_and_data as "Disk space needed for application and data"
+				Operating_System_Type as "Operating System Type"
+				What_environment_should_this_server_be_created_for as "What environment should this server be created for?"
+				Network_VLAN_ID_if_known as "Network VLAN ID (if known)"
+				Technical_Point_of_Contact_for_the_project as "Technical Point of Contact for the project"
+				Contact_Email as "Contact Email"
+				Contact_Phone_Number as "Contact Phone Number"
+				(
+					displayformat = plainnumber 
+					linktodial = enable
+				)
+				Developer_Contact_for_the_project as "Developer Contact for the project"
+				Contact_Email_developer as "Contact Email"
+				Contact_Phone_Number_developer as "Contact Phone Number"
+				(
+					displayformat = plainnumber 
+					linktodial = enable
+				)
+				Is_there_sensitive_data_involved as "Is there sensitive data involved?"
+				Please_explain_the_type_of_sensitive_data_involved as "Please explain the type of sensitive data involved."
+				Describe_the_applications_or_services_that_will_be_hosted_on_the_server as "Describe the applications or services that will be hosted on the server."
+				List_all_accounts_requiring_administrative_server_access as "List all accounts requiring administrative server access"
+				Other_users_that_need_to_have_access_to_the_server as "Other users that need to have access to the server"
+				Data_Retention_Requirements as "Data Retention Requirements"
+				Does_this_server_need_to_be_backed_up as "Does this server need to be backed up?"
+				Additional_Requirements as "Additional Requirements"
+				Desired_Hostname as "Desired Hostname"
+				Attach_additional_requirements_from_Vendor as "Attach additional requirements from Vendor"
+			)
+		}
+		default list All_Employees
+		{
+			displayName = "All Employees"
+			show all rows from Employee    
+			(
+				Name 
+	 			(
+	      			displayformat = [first_name+""+prefix+""+last_name+""+suffix]
+	 			)
+			)
+		}
+		default list All_Operating_System_Types
+		{
+			displayName = "All Operating System Types"
+			show all rows from Operating_System_Type    
+			(
+				Operating_System_Type as "Operating System Type"
+			)
+		}
+		default list All_Firewall_Conduit_acl_Requirements
+		{
+			displayName = "All Firewall Conduit/acl Requirements"
+			show all rows from Firewall_Conduit_ACL_Requirements    
+			(
+				Source
+				Destination_IP_s as "Destination IP's"
+				Destination_Ports as "Destination Ports"
+			)
+		}
+	}
+	pages
+	{
+		page Search_Widget
+		{
+			displayname = "Search Widget"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\twebDeviceConfig='{\"layout\":{\"displayType\":\"card\",\"design\":\"fluid\",\"style\":\"padding-right:0px;padding-top:0px;padding-bottom:0px;padding-left:0px;\"}}'\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<widgets elementName='Widget' importedTemplate='true'\/>\n<\/column>\n<\/row>\n<\/layout>\n<\/zml>"
+		}
+		page helpiowa_v3(string page)
+		{
+			displayname = "helpiowa_v3"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\twebDeviceConfig='{\"layout\":{\"displayType\":\"plain\",\"design\":\"fluid\",\"style\":\"padding-right:0px;padding-top:0px;padding-bottom:0px;padding-left:0px;\"}}'\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<dsp id='html_snippet3' elementName=\"HTML Snippet\"\n bgColor=\"#FFFFFF\" \n>\n\t<![CDATA[htmlpage html_snippet3()\ncontent\n&lt;%{\n\tPublicAppUrl = &quot;https:\/\/creatorapp.zohopublic.in\/girimservices_in_zohotest\/help-iowa\/page-perma\/helpiowa_v3\/1EFN3CzJnYK6aCf1QbjTFWq07jZBXbwq2JwYed46KfxMECs7e4rMVQ5sx4TjYuuNjthWhMXdYqqbXzQmD7EVQWmkb6Jy7Z0jBJpt&quot;;\n\t%&gt;\n&lt;style&gt;\n* {\n    box-sizing: border-box;\n\/*overflow: hidden;*\/\n}\n\n.column-container .zc-pb-tile-container\n{\n\tpadding:0px;\n}\n.zc-pb-page-content-wrapper .elemContainment\n{\n\tpadding:0px;\n}\n.zcs-body{\n\tdisplay: flex;\n    flex-direction: column;\n    min-height: 100vh;\n    width: 100%;\n}\n\/* Container for the rows *\/\n    .zcs-container {\n\t  flex: 1; \/* Take available height so footer stays down *\/\n      display: flex;\n      flex-direction: column;\n      height: 85%; \/* Full height *\/\n&lt;%\n\tif(input.page.isempty() || input.page in {&quot;&quot;,null})\n\t{\n\t\t%&gt;\nbackground-image: url(&quot;https:\/\/creatorapp.zohopublic.in\/file\/girimservices_in_zohotest\/help-iowa\/All_Images\/276743000001808026\/Image\/download\/7w1xBEF6OtuQp9Fhr8KN7eKANSwmCjjgYwKjDwwOdZMjy3qGHm6Kx876RYBBksR3Uqq1yUJMMSCT9ww3kvdTUef2thvEYxz7Ek0U?filepath=\/1749559366403485_image.png&quot;);\n\t  background-size: cover;  \/* Ensures the image covers the div *\/\n\t  background-position: center;  \/* Centers the image *\/\n\t  background-repeat: no-repeat;  \/* Prevents the image from repeating *\/\n&lt;%\n\t}\n\t%&gt;\n}\n\n    \/* Row styling *\/\n    .zcs-row {\n      display: flex;\n      justify-content: space-between;\n      width: 100%;\n      margin-bottom: 20px;\n    }\n\t.zcs-header-top{\n\t\tbackground-color: black;\n\t\tdisplay: flex;\n\t\tjustify-content: space-around;\n\t\twidth: 100%;\n\t}\n\t.zcs-header-top-data{\n\t\tcolor: white;\n\t\tpadding: 20px;\n\t}\n\t.zcs-header-top-data-container{\n\t\tdisplay: flex;\n\t}\n    \/* Column styling *\/\n    .zcs-column {\n      flex: 1; \/* Makes each column take equal space *\/\n      margin: 0 10px; \/* Adds spacing between columns *\/\n      background-color: rgba(255, 255, 255, 0.7); \/* Semi-transparent background *\/\n      padding: 20px;\n      border: 1px solid #ddd;\n    }\n\t.zcs-hyperlink-1{\n\t\tcolor:white;\n\t\tfont-weight: 700;\n\t\ttext-decoration: none; \/* Optional: Removes underline from the link *\/\n\t\ttransition: all 0.3s ease; \/* Smooth transition for hover effect *\/\n\t}\n\t.zcs-hyperlink-1:hover{\n\t\tcolor: white;\n\t\tbackground-color: rgba(255, 255, 255, 0.3); \/* Light white background on hover *\/\n\t\tborder-radius: 4px; \/* Optional: Adds rounded corners *\/\n\t\tpadding: 5px; \/* Optional: Adds space around the text to make the highlight effect more visible *\/\n\t}\n\t.zcs-hyperlink-2{\n\t\tcolor: white;\n\t\ttext-decoration: none; \/* Optional: Removes underline from the link *\/\n\t\ttransition: all 0.3s ease; \/* Smooth transition for hover effect *\/\n\t}\n\t.zcs-hyperlink-2:hover{\n\t\tcolor: white;\n\t\tbackground-color: rgba(255, 255, 255, 0.3); \/* Light white background on hover *\/\n\t\tborder-radius: 4px; \/* Optional: Adds rounded corners *\/\n\t\tpadding: 5px; \/* Optional: Adds space around the text to make the highlight effect more visible *\/\n\t}\n\t.zcs-header {\n\t\tdisplay: flex;\n\t\tjustify-content: space-between;\n\t\talign-items: center;\n\t\twidth: 100%;\n\t\tpadding: 0px 20px;\n&lt;%\n\tif(input.page in {&quot;about-us&quot;,&quot;contactus&quot;,&quot;requestsupport&quot;})\n\t{\n\t\t%&gt;\nbackground-color: rgb(86, 150, 215);\n&lt;%\n\t}\n\telse\n\t{\n\t\t%&gt;\nbackground-color: rgba(0, 0, 0, 0.8);\n&lt;%\n\t}\n\t%&gt;\nflex-wrap: wrap;\n\t\toverflow: hidden; \/* Prevents overflow *\/\n\t}\n\t.zcs-header-data{\n\t\tcolor:white;\n\t\tpadding: 10px;\n\t\tfont-size: 1.3em;\n\t}\n\t.zcs-header-data.left {\n\t\tfont-size: 2em;\n\t\tflex: 1 1 auto; \/* Responsive sizing *\/\n\t\tdisplay: flex;\n\t\tjustify-content: center;\n\t}\n\t.zcs-header-data.left a {\n\t\tcolor:white;\n\t}\n\t\n\t.zcs-header-data.right {\n\t\tflex-wrap: wrap;\n\t\talign-items: center;\n\t\tjustify-content: center;\n\t\tmax-width: 100%; \/* prevent it from exceeding the parent *\/\n\t\tflex: 1 1 auto;\n\t\tgap: 10px;\n\t}\n\t.zcs-header-data.right a {\n\t\tcolor: white;\n\t\ttext-decoration: none;\n\t\tpadding: 10px 15px;\n\t\tborder-radius: 4px;\n\t\ttransition: background-color 0.3s ease;\n\t\twhite-space: nowrap; \/* Prevent text wrapping in menu items *\/\n\t}\n\t\n\t.zcs-header-data.right a:hover {\n\t\tbackground-color: rgba(255, 255, 255, 0.3);\n\t}\n\t\/* Hide the checkbox *\/\n.zcs-menu-toggle {\n    display: none;\n}\n\/* Style the hamburger icon *\/\n.zcs-menu-icon {\n    display: none;\n    font-size: 2em;\n    cursor: pointer;\n    color: white;\n    padding: 10px;\n}\n.zcs-aboutus {\n    background-color: rgba(255, 255, 255, 0.8); \/* light background *\/\n    padding: 30px;\n    margin: 20px;\n    border-radius: 8px;\n    border: 1px solid #ddd;\n    font-family: &apos;Arial&apos;, sans-serif;\n    color: #333;\n    line-height: 1.6;\n    box-shadow: 0 4px 12px rgba(0,0,0,0.1);\n}\n\n.zcs-aboutus h2 {\n    font-size: 2em;\n    color: #4f52bd; \/* your site&apos;s blue *\/\n    margin-bottom: 10px;\n}\n\n.zcs-aboutus hr {\n    border: none;\n    border-top: 2px solid #4f52bd;\n    margin-bottom: 20px;\n}\n\n.zcs-aboutus p {\n    margin-bottom: 15px;\n    font-size: 1.05em;\n}\n\n.zcs-aboutus ul {\n    padding-left: 20px;\n    margin-bottom: 15px;\n}\n\n.zcs-aboutus ul li {\n    margin-bottom: 8px;\n    font-size: 1.05em;\n}\n\n.zcs-aboutus a {\n    color: #4f52bd;\n    text-decoration: underline;\n}\n\n.zcs-aboutus a:hover {\n    color: #333;\n    text-decoration: none;\n}\n.zcs-requestsupport{\n\tdisplay: flex;\n    justify-content: center; \/* center horizontally *\/\n    align-items: center;     \/* center vertically if container has height *\/\n    width: 100%;             \/* full width parent *\/\n    max-width: 800px;        \/* optionally constrain maximum *\/\n    margin: 40px auto;       \/* vertical spacing + horizontal centering *\/\n    padding: 30px;\n    background-color: rgba(255, 255, 255, 0.9);\n    border-radius: 8px;\n    box-shadow: 0 4px 12px rgba(0,0,0,0.1);\n}\n\/* Responsive - Mobile menu *\/\n@media (max-width: 768px) {\n\t.zcs-menu-icon {\n        display: block;\n    }\n\t.zcs-menu {\n        display: none;\n        flex-direction: column;\n        width: 100%;\n    }\n\n    \/* Show menu when checkbox is checked *\/\n    .zcs-menu-toggle:checked + .zcs-menu-icon + .zcs-menu {\n        display: flex;\n    }\n    .zcs-header {\n        flex-wrap: wrap;\n    }\n\t.zcs-header-top {\n        flex-direction: column; \/* Stack vertically *\/\n        align-items: flex-start;\n        padding: 5px 10px; \/* Smaller padding *\/\n    }\n\n    .zcs-header-top-data-container {\n        flex-wrap: wrap;\n        justify-content: flex-start;\n        padding: 5px 0; \/* Less vertical space *\/\n    }\n\n    .zcs-header-top-data {\n        padding: 5px 10px; \/* Smaller padding *\/\n        font-size: 0.9em; \/* Slightly smaller text *\/\n    }\n\n    .zcs-header-data.left {\n        font-size: 1.5em; \/* Reduce logo size *\/\n    }\n\t\n    .zcs-header-data.right {\n\t\tdisplay: none; \/* Hide by default *\/\n        flex-direction: column;\n        width: 100%;\n        padding-top: 5px;\n    }\n\n    .zcs-header-data.right a {\n\t\tfont-size: 0.95em;\n\t\tpadding: 6px 10px;\n        display: block;\n        width: 100%;\n        text-align: left;\n    }\n\t.zcs-row.search {\n        margin-top: 10px;\n    }\n    \/* Make cards responsive *\/\n    .zcs-row.cards .zcs-card-link {\n        flex: 1 1 100%; \/* Full width on mobile *\/\n        max-width: 100%;\n    }\n\n    .zcs-row.cards .zcs-card {\n        max-width: 100%; \/* Full width *\/\n        padding: 20px; \/* Slightly smaller padding for small screens *\/\n        border-radius: 8px;\n    }\n\n    .zcs-card-title {\n        font-size: 1.2em; \/* Adjust font size for mobile *\/\n    }\n\n    .zcs-card-text {\n        font-size: 1em;\n        line-height: 1.5em;\n    }\n\t\/* Add this for footer fix *\/\n    .zcs-footer-content {\n        flex-direction: column;\n        gap: 10px;\n    }\n\n    .zcs-footer-content div {\n        flex: 1 1 100%; \/* Each link takes full width on small screen *\/\n    }\n\n    .zcs-footer-content .zcs-hyperlink-3 {\n        display: inline-block;\n        padding: 5px 10px;\n    }\n\t.zcs-requestsupport {\n        display: block !important; \/* Remove flex and revert to block *\/\n        justify-content: initial !important; \/* Remove horizontal centering *\/\n        align-items: initial !important; \/* Remove vertical centering *\/\n        width: auto !important; \/* Reset width *\/\n        max-width: none !important; \/* Reset max width *\/\n        margin: 0 !important; \/* Remove margins *\/\n        padding: 0 !important; \/* Remove padding *\/\n        background-color: transparent !important; \/* Remove background *\/\n        border-radius: 0 !important; \/* Remove border radius *\/\n        box-shadow: none !important; \/* Remove box shadow *\/\n    }\n}\n@media screen and (max-width: 600px) {\n    .zcs-aboutus {\n        padding: 20px;\n        margin: 10px;\n        font-size: 0.95em;\n    }\n\n    .zcs-aboutus h2 {\n        font-size: 1.5em;\n        margin-bottom: 8px;\n    }\n\n    .zcs-aboutus p {\n        font-size: 1em;\n    }\n\n    .zcs-aboutus ul li {\n        font-size: 1em;\n    }\n}\n\/* Increase spacing between search and cards *\/\n.zcs-row.search {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 100%;\n    margin-bottom: 60px; \/* Increased from 40px *\/\n}\n\n.zcs-column span {\n    font-size: 2.0em;\n    font-weight: 700;\n    color: #4f52bd; \/* Match the color scheme *\/\n}\n\n.zcs-row.search .zcs-column input {\n    padding: 10px;\n    border: 1px solid #ddd; \/* Soft border *\/\n    border-radius: 4px; \/* Rounded input *\/\n    font-size: 1.2em;\n    width: 100%; \/* Full width input *\/\n    margin-top: 10px; \/* Adds spacing above input *\/\n    background-color: #f9f9f9; \/* Light background for the input *\/\n}\n\n.zcs-row.search .zcs-column input:focus {\n    outline: none;\n    border-color: #4f52bd; \/* Highlight on focus *\/\n}\n\n.zcs-row.search .zcs-column {\n    max-width: 900px;\n    width: 100%;\n\tborder-radius: 4px; \/* Optional: Adds rounded corners *\/\n\n}\n\t\t\/* Footer Row *\/\n.zcs-footer {\n    background-color: white; \/* Footer background *\/\n\tpadding: 15px 20px;    \n    text-align: center;\n    border-top: 1px solid #444;\n    font-size: 1.1em;\n}\n.zcs-footer-content{\n\tdisplay: Flex;\n\tflex-wrap: wrap;\n\tjustify-content: center;\n    gap: 20px;\n}\n.zcs-footer-content div {\n    flex: 0 0 auto;\n    text-align: center;\n}\n.zcs-hyperlink-3{\n\t\n\ttransition: all 0.3s ease; \/* Smooth transition for hover effect *\/\n}\n.zc-pb-embed-placeholder-content .divEmbedContainer {\n\theight:auto !important;\n}\n\n.zcs-row.cards {\n    display: flex;\n    justify-content: center;\n    align-items: stretch; \/* Make all cards equal height *\/\n    flex-wrap: wrap; \/* For responsive stacking on mobile *\/\n    gap: 20px; \/* Space between cards *\/\n    margin-bottom: 40px;\n}\n\n.zcs-row.cards .zcs-card {\n    flex: 1 1 300px; \/* Increased from 250px *\/\n    max-width: 350px; \/* Increased from 300px *\/\n    background-color: rgba(255, 255, 255, 0.7);\n    border-radius: 12px;\n    padding: 30px; \/* Increased from 20px *\/\n    border: 1px solid #ddd;\n    text-align: center;\n    box-shadow: 0 6px 14px rgba(0,0,0,0.12); \/* Slightly stronger shadow *\/\n    transition: transform 0.3s ease, box-shadow 0.3s ease;\n    cursor: pointer;\n}\n\n.zcs-row.cards .zcs-card:hover {\n    transform: translateY(-5px); \/* Lift on hover *\/\n    box-shadow: 0 8px 20px rgba(0,0,0,0.15);\n}\n\n.zcs-card-title {\n    font-size: 1.4em; \/* Increased from 1.2em *\/\n    font-weight: bold;\n    color: #4f52bd;\n    margin-bottom: 15px; \/* Increased spacing *\/\n}\n\n.zcs-card-text {\n    font-size: 1.05em; \/* Increased from 0.95em *\/\n    color: #4f52bd;\n    line-height: 1.6em; \/* Increased line height *\/\n}\n.zcs-row.cards .zcs-card-link {\n    text-decoration: none; \/* Remove underline *\/\n    color: inherit; \/* Inherit text color *\/\n    display: block; \/* Make the link block-level (whole card clickable) *\/\n    flex: 1 1 250px;\n    max-width: 300px;\n}\n\n.zcs-row.cards .zcs-card-link:hover .zcs-card {\n    transform: translateY(-5px);\n    box-shadow: 0 8px 20px rgba(0,0,0,0.15);\n}\n.zcs-m-b {\n    margin-bottom: 20px;\n\tcolor: #4f52bd;\n}\n.zcs-row.search .zcs-column div[elName=&apos;zc-component&apos;] {\n\theight: 66px !important;\n    width: 100%;\n    border-radius: 5px;\n\toverflow: hidden !important;\n}\n.search-container{\n\tborder: 0px !important;\n}\n[id^=&quot;Search_Widget_ZC&quot;] {\n       overflow: hidden !important;\n}\n&lt;\/style&gt;\n&lt;div class=&quot;zcs-body&quot;&gt;\n&lt;div class=&quot;zcs-header-top&quot;&gt;\n\t\t&lt;div class=&quot;zcs-header-top-data-container&quot;&gt;\n\t\t&lt;div class=&quot;zcs-header-top-data&quot;&gt;Official State of Iowa Website&lt;\/div&gt;\n\t\t&lt;div class=&quot;zcs-header-top-data&quot;&gt;&lt;a class=&quot;zcs-hyperlink-1&quot; href=&quot;https:\/\/www.iowa.gov\/official-website&quot;&gt;Here is how you know&lt;\/a&gt;&lt;\/div&gt;\n\t\t&lt;\/div&gt;\n\t\t&lt;div class=&quot;zcs-header-top-data-container&quot;&gt;\n\t\t&lt;div class=&quot;zcs-header-top-data&quot;&gt;&lt;a target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;zcs-hyperlink-2&quot; href=&quot;https:\/\/directory.iowa.gov\/organization\/index&quot;&gt;Agencies A-Z&lt;\/a&gt;&lt;\/div&gt;\n        &lt;div class=&quot;zcs-header-top-data&quot;&gt;&lt;a target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; class=&quot;zcs-hyperlink-2&quot; href=&quot;https:\/\/directory.iowa.gov\/service\/index&quot;&gt;Programs &amp; Services&lt;\/a&gt;&lt;\/div&gt;\n\t\t&lt;\/div&gt;\n&lt;\/div&gt;\n&lt;div class=&quot;zcs-container&quot;&gt;\n      &lt;div class=&quot;zcs-row zcs-header&quot;&gt;\n        &lt;div class=&quot;zcs-header-data left&quot;&gt;&lt;a href=&quot;&lt;%=PublicAppUrl%&gt;&quot;&gt;&lt;b&gt;help&lt;\/b&gt;&lt;span style=&quot;font-weight: 200;&quot;&gt;.iowa.gov&lt;\/span&gt;&lt;\/a&gt;&lt;\/div&gt;\n\t\t&lt;input type=&quot;checkbox&quot; id=&quot;menu-toggle&quot; class=&quot;zcs-menu-toggle&quot; \/&gt;\n\t\t&lt;label for=&quot;menu-toggle&quot; class=&quot;zcs-menu-icon&quot;&gt;&amp;#9776;&lt;\/label&gt; &lt;!-- Hamburger icon --&gt;\n        &lt;div class=&quot;zcs-header-data right zcs-menu&quot;&gt;\n\t\t&lt;a href=&quot;&lt;%=PublicAppUrl%&gt;&quot;&gt;Home&lt;\/a&gt;\n\t\t&lt;a href=&quot;&lt;%=PublicAppUrl%&gt;?page=about-us&quot;&gt;About Us&lt;\/a&gt;\n\t\t&lt;a href=&quot;https:\/\/iowa.service-now.com\/soiess\/&quot;&gt;State Employee Service Desk&lt;\/a&gt;\n\t\t&lt;a href=&quot;https:\/\/iowa.service-now.com\/soiess?id=sc_cat_item&amp;sys_id=d319d4aadb8f2c9064d19b3c8a9619f5&quot;&gt;eDiscovery Request&lt;\/a&gt;\n\t\t&lt;\/div&gt;\n      &lt;\/div&gt;\n&lt;%\n\tif(input.page = &quot;about-us&quot;)\n\t{\n\t\t%&gt;\n&lt;div class=&quot;zcs-aboutus&quot;&gt;\n    &lt;h2&gt;About Us&lt;\/h2&gt;\n    &lt;hr&gt;\n    &lt;p&gt;The State of Iowa Service Desk, led by the Office of the Chief Information Officer (OCIO), provides the State of Iowa and its customers a central point of contact for support with their IT needs 24 hours a day, 7 days a week. Most items can be handled immediately by the Service Desk. Those that cannot be immediately resolved will be routed to the appropriate support team for resolution. The Service Desk works closely with these teams in escalation and resolution of high priority tickets.&lt;\/p&gt;\n    &lt;p&gt;There are multiple ways to contact the State of Iowa Service Desk:&lt;\/p&gt;\n    &lt;ul&gt;\n        &lt;li&gt;&lt;strong&gt;Online Support&lt;\/strong&gt; Available at &lt;a href=&quot;https:\/\/help.iowa.gov&quot;&gt;help.iowa.gov&lt;\/a&gt;&lt;\/li&gt;\n        &lt;li&gt;&lt;strong&gt;Phone&lt;\/strong&gt; (515) 281-5703 or 800-532-1174&lt;\/li&gt;\n        &lt;li&gt;&lt;strong&gt;TTY Access&lt;\/strong&gt; 800-735-2943&lt;\/li&gt;\n    &lt;\/ul&gt;\n    &lt;p&gt;For matters requiring immediate attention, please call the Service Desk.&lt;\/p&gt;\n&lt;\/div&gt;\n&lt;%\n\t}\n\telse if(input.page = &quot;contactus&quot;)\n\t{\n\t\t%&gt;\n&lt;div class=&quot;zcs-aboutus&quot;&gt;\n    &lt;h2&gt;Contact Us&lt;\/h2&gt;\n    &lt;hr&gt;\n    &lt;h3&gt;General Help Questions&lt;\/h3&gt;\n    &lt;p&gt;Staff can help you find the information or state agency program that can provide answers. This general help line is for non-technical questions.&lt;\/p&gt;\n    &lt;ul&gt;\n        &lt;li&gt;&lt;strong&gt;Phone:&lt;\/strong&gt; 515-281-4102&lt;\/li&gt;\n        &lt;li&gt;&lt;strong&gt;Email:&lt;\/strong&gt; &lt;a href=&quot;mailto:information.services@iowa.gov&quot;&gt;information.services@iowa.gov&lt;\/a&gt;&lt;\/li&gt;\n    &lt;\/ul&gt;\n\n    &lt;h3&gt;Technical System Support Questions&lt;\/h3&gt;\n    &lt;p&gt;The Service Desk provides technical help for password resets or unlocking accounts. Technical support is available 7 a.m. - 5 p.m. Monday through Friday except for State Holidays. Outside of regular business hours, limited support is provided by phone only. For technical system matters requiring immediate attention, please call the Service Desk.&lt;\/p&gt;\n    &lt;ul&gt;\n        &lt;li&gt;&lt;strong&gt;Technical Support Online:&lt;\/strong&gt; &lt;a href=&quot;https:\/\/help.iowa.gov&quot; target=&quot;_blank&quot;&gt;Submit a system support request&lt;\/a&gt;&lt;\/li&gt;\n        &lt;li&gt;&lt;strong&gt;Phone:&lt;\/strong&gt; Dial 515-281-5703 or 800-532-1174&lt;\/li&gt;\n        &lt;li&gt;&lt;strong&gt;TTY Access Available:&lt;\/strong&gt; 800-735-2943&lt;\/li&gt;\n        &lt;li&gt;&lt;a href=&quot;&lt;%=PublicAppUrl%&gt;&quot;&gt;&lt;strong&gt;Search our knowledge base&lt;\/strong&gt;&lt;\/a&gt;&lt;\/li&gt;\n    &lt;\/ul&gt;\n\n    &lt;h3&gt;Delivery and Mailing Address:&lt;\/h3&gt;\n    &lt;p&gt;Iowa Office of the Chief Information Officer&lt;br&gt;\n    200 East Grand Avenue&lt;br&gt;\n    Des Moines, IA 50309&lt;\/p&gt;\n&lt;\/div&gt;\n&lt;%\n\t}\n\telse if(input.page = &quot;requestsupport&quot;)\n\t{\n\t\t%&gt;\n&lt;div class=&quot;zcs-requestsupport&quot;&gt;\n\t\t\t\t&lt;div elName=&apos;zc-component&apos; formLinkName=&apos;Request_Support&apos; params=&apos;zc_Header=false&amp;amp;zc_SuccMsg=Data Added Successfully!&amp;amp;zc_SubmitVal=Submit&amp;amp;zc_ResetVal=Reset&amp;privatelink=sJjORm3NMrVFBCm3UrMBp69Q48qqh5QG7gK2hx5jjED8TRbC0ASQuuDFk81dtkUAEFzBAGF89wjQD7FqbkRV4CYDzf7P2wFGO4dY&apos;&gt;Loading Form...&lt;\/div&gt;\n\t\t\t\t&lt;\/div&gt;\n&lt;%\n\t}\n\telse\n\t{\n\t\t%&gt;\n&lt;div class=&quot;zcs-row search&quot;&gt;\n        &lt;div class=&quot;zcs-column&quot;&gt;&lt;span style=&quot;font-size: 2.0em;font-weight: 700;&quot;&gt;Search&lt;\/span&gt;&lt;br&gt;&lt;br&gt;&lt;div class=&quot;zcs-widget&quot; elName=&apos;zc-component&apos; pageLinkName=&apos;Search_Widget&apos; params=&apos;privatelink=wagE8SFm7OMyCtP1C0rVe2QBnzOwTUEsHeztTFdrN4bK7PTrWgVJYMevSShegffjPatpHqgGkkMT4NyJZz8Gjar7WkKYWz4wmxyn&apos;&gt;&lt;\/div&gt;&lt;\/div&gt;\n\t\t\n      &lt;\/div&gt;\n      &lt;div class=&quot;zcs-row cards&quot;&gt;\n\t  \n    &lt;a href=&quot;&lt;%=PublicAppUrl%&gt;?page=requestsupport&quot; class=&quot;zcs-card-link&quot;&gt;\n        &lt;div class=&quot;zcs-card&quot;&gt;\n            &lt;div class=&quot;zcs-m-b fa fa-university fa-4x text-primary&quot;&gt;&lt;\/div&gt;\n            &lt;div class=&quot;zcs-card-title&quot;&gt;REQUEST SUPPORT&lt;\/div&gt;\n            &lt;div class=&quot;zcs-card-text&quot;&gt;\n                Report a problem&lt;br&gt;OR&lt;br&gt;Submit a support request\n            &lt;\/div&gt;\n        &lt;\/div&gt;\n    &lt;\/a&gt;\n\t\n    &lt;a href=&quot;https:\/\/www.iowa.gov\/chat&quot; class=&quot;zcs-card-link&quot;&gt;\n        &lt;div class=&quot;zcs-card&quot;&gt;\n\t\t\t&lt;div class=&quot;zcs-m-b fa fa-comments-o fa-4x  text-default&quot;&gt;&lt;\/div&gt;\n            &lt;div class=&quot;zcs-card-title&quot;&gt;QUESTIONS?&lt;\/div&gt;\n            &lt;div class=&quot;zcs-card-text&quot;&gt;\n                Ask a State Librarian&lt;br&gt;Monday - Friday&lt;br&gt;8:00am - 4:30pm\n            &lt;\/div&gt;\n        &lt;\/div&gt;\n    &lt;\/a&gt;\n\t\n    &lt;a href=&quot;https:\/\/sites.google.com\/a\/iowa.gov\/googlehelp\/home&quot; class=&quot;zcs-card-link&quot;&gt;\n        &lt;div class=&quot;zcs-card&quot;&gt;\n\t\t\t&lt;div class=&quot;zcs-m-b fa fa-google fa-4x  text-default&quot;&gt;&lt;\/div&gt;\n            &lt;div class=&quot;zcs-card-title&quot;&gt;GOOGLE SUPPORT&lt;\/div&gt;\n            &lt;div class=&quot;zcs-card-text&quot;&gt;\n                For State Employees&lt;br&gt;(515) 281-5703&lt;br&gt;(800) 532-1174\n            &lt;\/div&gt;\n        &lt;\/div&gt;\n    &lt;\/a&gt;\n\t\n&lt;\/div&gt;\n&lt;%\n\t}\n\t%&gt;\n&lt;\/div&gt;\n\t&lt;div class=&quot;zcs-footer&quot;&gt;\n\t\t&lt;div class=&quot;zcs-footer-content&quot;&gt;\n\t\t\t&lt;div&gt;&lt;a class=&quot;zcs-hyperlink-3&quot; href=&quot;http:\/\/iowa.gov\/&quot;&gt;State of Iowa&lt;\/a&gt;&lt;\/div&gt;\n\t\t\t&lt;div&gt;&lt;a class=&quot;zcs-hyperlink-3&quot; href=&quot;http:\/\/iowa.gov\/pages\/policies&quot;&gt;Policies&lt;\/a&gt;&lt;\/div&gt;\n\t\t\t&lt;div&gt;&lt;a class=&quot;zcs-hyperlink-3&quot; href=&quot;http:\/\/get.adobe.com\/reader&quot;&gt;Adobe PDF Reader&lt;\/a&gt;&lt;\/div&gt;\n\t\t\t&lt;div&gt;&lt;a class=&quot;zcs-hyperlink-3&quot; href=&quot;&lt;%=PublicAppUrl%&gt;?page=contactus&quot;&gt;Contact Us&lt;\/a&gt;&lt;\/div&gt;\n\t\t&lt;\/div&gt;\n\t&lt;\/div&gt;\n&lt;\/div&gt;\n&lt;%\n\n}%&gt;]]>\n<\/dsp>\n<\/column>\n<\/row>\n<\/layout>\n<\/zml>"
+		}
+		page Home(string page)
+		{
+			displayname = "Home"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<dsp id='html_snippet' elementName=\"HTML Snippet\"\n bgColor=\"#FFFFFF\" \n>\n\t<![CDATA[htmlpage html_snippet()\ncontent\n&lt;%{\n\tPublicAppUrl = &quot;https:\/\/creatorapp.zohopublic.in\/girimservices_in_zohotest\/help-iowa\/page-perma\/Home\/fMnQZRVWtnzTSYgWdJPZ3j5Tp2a7gEf81M3kbsPaMDZNHF6FdJK1YVfBkdtYfuOeDHXjqsuOKAVdXVm1fqpEXVjvVBUWh8OT0vsq&quot;;\n\tkeyboard_and_headset = Supporting_Images[ImageID == 2];\n\tgoogle_support = Supporting_Images[ImageID == 4];\n\t%&gt;\n&lt;!DOCTYPE html&gt;\n&lt;html lang=&quot;en&quot;&gt;\n&lt;head&gt;\n    &lt;meta charset=&quot;UTF-8&quot;&gt;\n    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;\n    &lt;title&gt;support.iowa.gov - State of Iowa&lt;\/title&gt;\n\n\t&lt;link rel=&quot;preconnect&quot; href=&quot;https:\/\/fonts.googleapis.com&quot;&gt;\n\t&lt;link rel=&quot;preconnect&quot; href=&quot;https:\/\/fonts.gstatic.com&quot; crossorigin&gt;\n\t&lt;link href=&quot;https:\/\/fonts.googleapis.com\/css2?family=Work+Sans:wght@400;500;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;\n    &lt;style&gt;\n\t\t.zc-pb-page-content-wrapper .elemContainment{\n\t\t\tpadding:0px !important;\n\t\t}\n\t\t.column-container .zc-pb-tile-container{\n\t\t\tpadding:0px !important;\n\t\t}\n       \/* 1. Global Styles &amp; Resets *\/\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n\t\t\tfont-family:&quot;Work Sans&quot;,Arial,Helvetica,sans-serif !important;\n        }\n\t\t.zc-li-outline{\n\t\t\tfont-family:&quot;ZC Live Outline&quot; !important;\n\t\t}\n\n\t\t   [id^=&quot;Search_Widget_ZC&quot;] { overflow: hidden !important; } \n\t\t\n\n        .zcjs-page-container {\n            display: flex;\n            flex-direction: column;\n            height: 98vh !important;\n        }\n        \n        .zcjs-main {\n            flex: 1;\n\t\t\tbackground-image: \n                linear-gradient(rgba(204, 204, 204, 0.4) 1px, transparent 1px),\n                linear-gradient(90deg, rgba(230, 230, 230, 0.4) 1px, transparent 1px);\n            background-size: 40px 40px;\n        }\n\n        .zcjs-container {\n            margin: 0 auto;\n            padding: 0 15px;\n\t\t\tmargin-bottom: 14px;\n        }\n\t\t.zcjs-footer-container{\n\t\t\tmargin: 0 auto;\n\t\t\tpadding: 0 15px;\n\t\t}\n\n        a {\n            text-decoration: none;\n            color: inherit;\n        }\n\n        \/* 2. Header &amp; Navigation *\/\n        .zcjs-main-header {\n\t\t\tpadding: 10px 0;\n            border-bottom: 1px solid #e0e0e0;\n\t\t\tbackground-color: #FFFFFF;\n\t\t\tposition:fixed;\n\t\t\ttop:0;\n\t\t\tleft:0;\n\t\t\twidth:100%;\n\t\t\tz-index:1000;\n        }\n\n        .zcjs-header-content {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n\t\t\tflex-wrap: wrap; \n            gap: 15px;\n        }\n\n        .zcjs-logo {\n            display: flex;\n            align-items: center;\n            gap: 12px;\n        }\n\n        .zcjs-logo img {\n            height: 25px;\n        }\n\n        .zcjs-logo-text {\n            font-size: 1.2rem;\n            color: #192A4E;\n        }\n\n\t\t.zcjs-separator {\n\t\t\tmargin: 0 8px;\n\t\t\tcolor: #0B114D;\n\t\t}\n\n        .zcjs-main-nav ul {\n            display: flex;\n            align-items: center;\n            list-style: none;\n            gap: 10px;\n\t\t\tflex-wrap: wrap;\n        }\n\n        .zcjs-main-nav a {\n            font-size: 1rem;\n            font-weight: 500;\n            color: #192A4E;\n            padding: 8px 12px;\n            transition: all 0.3s ease;\n\t\t\tborder-radius: 6px;\n        }\n\n        .zcjs-main-nav a:hover {\n            background-color: #f2f7f8;\n            color: #0056b3;\n        }\n\n        \/* 3. Hero &amp; Search Section *\/\n       .zcjs-hero-section {\n           padding-top: 10px;\n       }\n\t   \n\t   .zcjs-center {\n\t\t\tmax-width: 800px;\n\t\t\tmargin: 0 auto;\n\t\t\tpadding: 10px;\n\t\t\ttext-align: left;\n\t\t}\n\n\t\t.zcjs-center h1 {\n\t\t\tfont-size: 1.75rem;\n\t\t\tfont-weight: 400;\n\t\t\tcolor: #6c757d;\n\t\t\tmargin-bottom: 0.5rem;\n\t\t}\n\n\t\t.zcjs-center h1::after { content: &apos;,&apos;; }\n\n\t\t.zcjs-center p {\n\t\t\tfont-size: 2.5rem;\n\t\t\tfont-weight: 600;\n\t\t\tcolor: #212529;\n\t\t\tline-height: 1.2;\n\t\t\tmargin: 0;\n\t\t}\n\n\n        .zcjs-search-section {\n            position: relative;\n            margin-top: 35px; \n            z-index: 10;\n        }\n\n        \/* 4. Cards Section *\/\n        .zcjs-cards-section {\n            background-color: #F2F7F8;\n            padding: 20px 0;\n\t\t\tmargin: 25px;\n\t\t\tborder-radius: 16px;\n        }\n        \n        .zcjs-search-section::after {\n            content: &apos;Important Links&apos;;\n            display: block;\n            text-align: center;\n            font-size: 1.3rem;\n            font-weight: 400;\n            color: #676d79;\n            margin-bottom: 40px;\n        }\n\n        .zcjs-cards-container {\n            display: flex;\n            justify-content: center;\n            flex-wrap: wrap;\n\t\t\tgap:30px;\n        }\n        \n        .zcjs-info-card {\n            background-color: #FFFFFF;\n            border-radius: 16px;\n            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);\n            padding: 15px;\n            min-width: 400px; \/* FIX 1: Set default\/web min-width to 400px *\/\n\t\t\tmax-width: 400px;\n\t\t\tflex: 1 1 300px;\n            border: 1px solid #e9ecef;\n            transition: all 0.3s ease;\n        }\n        \n        .zcjs-info-card:hover {\n            transform: translateY(-8px);\n            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);\n        }\n\t\t\n\t\t.zcjs-card-link {\n            text-decoration: none;\n            color: inherit;\n            display: flex;\n        }\n\t\t\n        .zcjs-card-image {\n           width: 100%;\n\t\t\theight: 150px;\n\t\t\tobject-fit: cover;\n\t\t\tborder-radius: 12px;\n\t\t\tmargin-bottom: 15px;\n        }\n\n        .zcjs-card-header {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin-bottom: 12px;\n        }\n\n        .zcjs-card-title {\n            font-size: 1.3rem;\n\t\t\tfont-weight: 600;\n\t\t\tcolor: #192A4E;\n        }\n\n        .zcjs-card-content p {\n            font-size: 0.95rem;\n            color: #555;\n            margin-bottom: 8px;\n            line-height: 1.4;\n        }\n\n        \/* 5. Footer *\/\n        .zcjs-main-footer {\n            background-color: #FFFFFF;\n            border-top: 1px solid #e0e0e0;\n            color: #6c757d;\n            font-size: 0.9rem;\n    \t\tpadding: 10px 0;\n\t\t\tposition: fixed;\n\t\t\tbottom: 0;\n\t\t\tleft: 0;\n\t\t\twidth: 100%;\n\t\t\tz-index: 1000;\n        }\n\n        .zcjs-footer-content {\n            display: flex;\n\t\t\tflex-direction:column;\n\t\t\talign-items: center;\n\t\t\tgap: 8px;\n\t\t\ttext-align:center;\t\t\t\n        }\n\n        .zcjs-footer-links {\n           display: flex;\n\t\t   justify-content: center;\n\t\t   flex-wrap: wrap;\n\t\t   gap: 12px;\n\t\t   text-align:center;\n        }\n\n        .zcjs-footer-links a {\n            color: #888888;\n\t\t\tfont-size: 0.95rem;\n            font-weight: 500;\n            transition: color 0.3s ease;\n        }\n\n        .zcjs-footer-links a:hover {\n            color: #0056b3;\n        }\n\n        .zcjs-footer-links span {\n            color: #adb5bd;\n        }\n\t\t.zcjs-copyright {\n\t\t\twhite-space: nowrap;\n\t\t}\n\n        \/* 6. Content Pages (About\/Contact) *\/\n\t\t.zcs-aboutus , .zcs-contactus{\n            display: flex;\n\t\t\tflex-wrap: wrap;\n\t\t\tmax-width: 1100px;\n\t\t\tmargin: 25px auto;\n\t\t\tpadding: 25px;\n\t\t\tbackground-color: #F4F6F8;\n\t\t\tborder-radius: 8px;\n\t\t\talign-items: flex-start;\n        }\n\n        .zcs-aboutus h2 , .zcs-contactus h2{ \n\t\t\tflex: 1 1 143px;\n\t\t\tfont-size: 1.7rem;\n\t\t\tfont-weight: 700;\n\t\t\tcolor: #212529;\n\t\t\tmargin: 0;\n\t\t\tpadding-top: 5px;\n\t\t}\n\t\t\n\t\t.zcs-aboutus .about-us-details, .zcs-contactus .about-us-details{\n\t\t\tflex: 2 1 600px;\n\t\t}\n\n        .zcs-aboutus p , .zcs-contactus p {\n\t\t\tfont-size: 1rem;\n\t\t\tline-height: 1.8;\n\t\t\tcolor: #33373a;\n\t\t\tmargin: 0 0 2em 0;\n\t\t}\n        .zcs-aboutus ul , .zcs-contactus ul{ \n\t\t\tlist-style-type: disc;\n\t\t\tpadding-left: 25px;\n\t\t\tmargin: -1.5em 0 2em 0;\n\t\t\tfont-size: 1rem;\n\t\t\tline-height: 1.8;\n\t\t\tcolor: #33373a;\n\t\t}\n\t\t\n        .zcs-aboutus a, .zcs-aboutus strong , .zcs-contactus a , .zcs-contactus strong {\n\t\t\tcolor: #212529;\n\t\t\tfont-weight: 700;\n\t\t\ttext-decoration: none;\n\t\t}\n\t\t\n        div#elementsContainer{ \n\t\t\theight:84px;\n\t\t\tbackground:white;\n\t\t}\n\t\t.Layout.elemContainment {\n\t\t\tbackground:white !important;\n\t\t\tpadding : 8px !important;\n\t\t}\n\n\n        \/* 7. Responsive Design *\/\n        \n   \n\n\t\t@media (max-width: 992px) {\n            .zcjs-header-content {\n                justify-content: center;\n            }\n        }\n\t\t\n        @media (max-width: 768px) {\n\t\t\t.zcjs-center p {\n\t\t\t\tfont-size: 2rem;\n\t\t\t}\n\t\t\t.zcjs-search-bar {\n\t\t\t\tflex-direction: column;\n\t\t\t\tgap: 10px;\n\t\t\t\tborder-radius: 20px;\n\t\t\t\tpadding: 20px;\n\t\t\t}\n\t\t\t.zcjs-search-bar input {\n\t\t\t\twidth: 100%;\n\t\t\t\ttext-align: center;\n\t\t\t}\n\t\t\t.zcjs-search-bar button {\n\t\t\t\twidth: 100%;\n\t\t\t\tjustify-content: center;\n\t\t\t}\n\t\t\t.zcjs-footer-content {\n                flex-direction: column;\n                justify-content: center;\n                text-align: center;\n            }\n\t\t\t.zcs-aboutus ,.zcs-contactus {\n\t\t\t\tflex-direction: column;\n\t\t\t\tgap: 25px;\n\t\t\t\tpadding: 40px 30px;\n\t\t\t\tmargin: 30px 15px;\n\t\t\t}\n\n\t\t\t.zcs-aboutus h2 , .zcs-contactus h2 {\n\t\t\t\tflex-basis: auto;\n\t\t\t\tpadding: 0;\n\t\t\t\tborder-bottom: 1px solid #dde2e7;\n\t\t\t\tpadding-bottom: 15px;\n\t\t\t\tmargin-bottom: 5px;\n\t\t\t}\n\n            \/* --- NEW RULE FOR REQUEST SUPPORT BACKGROUND ON MOBILE --- *\/\n            .zcs-requestsupport.zcs-aboutus {\n                background-color: transparent;\n                padding: 0;\n                margin: 20px 0;\n                border-radius: 0;\n            }\n            \n            \/* FIX 2: Override card min-width for mobile *\/\n            .zcjs-info-card {\n                min-width: 300px;\n            }\n\t\t\t\n\t\t\t.zcs-widget{\n\t\t\t\theight: 130px !important;\n\t}\n\t\t\t.form-label{\n\t\t\t\tpadding:0px !important;\n\t\t\t\tpadding-top: 0px !important;\n\t\t\t}\n\t\t\t.zcjs-footer-links span {\n\t\t\t\tdisplay: none; \/* optional: hide separators on mobile for clean look *\/\n\t\t\t\t}\n\t\t\t\t.zcjs-main-header{\n\t\t\t\t\tposition: static !important;  \/* remove fixed positioning *\/\n\t\t\t\t\theight: auto;\n\t\t\t\t}\n\t\t\t\t.zcjs-main-footer {\n\t\t\t\t\tposition: static !important;  \/* remove fixed positioning *\/\n\t\t\t\t\tbottom: auto !important;\n\t\t\t\t\tleft:auto !important;\n\t\t\t\t\tz-index:auto !important;\n\t\t\t\t}\n\t\t\t\t.zcjs-main {\n\t\t\t\t\tposition: static;  \/* allow natural flow *\/\n\t\t\t\t\theight: auto;\n\t\t\t\t\toverflow-y: auto;\n\t\t\t\t\t}\n        }\n\n        \/* --- Request Support Page Centering Override --- *\/\n        .zcs-requestsupport.zcs-aboutus h2 {\n            display: none;\n        }\n        .zcs-requestsupport.zcs-aboutus {\n            justify-content: center;\n        }\n\n    \n\t\n\t.nav-toggle {\n  display: none;\n}\n\n\/* Hamburger Icon *\/\n.nav-toggle-label {\n  display: none;\n  flex-direction: column;\n  justify-content: space-between;\n  width: 24px;\n  height: 18px;\n  cursor: pointer;\n  position: absolute;\n  right: 10px;\n  z-index: 1001;\n}\n\n.nav-toggle-label span {\n  display: block;\n  height: 2px;\n  background-color: #192A4E;\n  border-radius: 2px;\n}\n\n\t@media (max-width: 600px) {\n  .zcjs-center h1 {\n    font-size: 1.3rem;\n    margin-bottom: 0.2rem;\n  }\n\n  .zcjs-center p {\n    font-size: 1.8rem;\n    line-height: 1.4;\n  }\n\n  .zcjs-center {\n    padding: 12px;\n  }\n  .zcjs-info-card {\n    min-width: 90%;\n    max-width: 100%;\n    margin: 0 auto;\n  }\n\n  .zcjs-cards-container {\n    gap: 20px;\n    padding: 0 10px;\n  }\n\n  .zcjs-card-image {\n    height: 120px;\n  }\n  .zcjs-footer-content {\n    flex-direction: column;\n    text-align: center;\n    padding: 10px;\n  }\n\n  .zcjs-footer-links {\n    flex-wrap: wrap;\n    justify-content: center;\n    gap: 8px;\n  }\n\n  .zcjs-footer-links a {\n    font-size: 13px;\n  }\n\n  .zcjs-footer-links span {\n    display: none; \/* hide dividers on mobile if needed *\/\n  }\n}\n\n@media (max-width: 768px) {\n  .nav-toggle-label {\n    display: flex;\n  }\n\n  .zcjs-main-nav {\n    display: none;\n    position: absolute;\n    top: 60px; \/* Below header *\/\n    right: 0;\n    left: 0;\n    background: white;\n    z-index: 1000;\n\tmax-height: 260px;      \/* Adjust height if needed *\/\n\toverflow-y: auto;       \/* Enable scroll if too long *\/\n\tborder-radius: 0 0 8px 8px;\n\tbox-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);\n  }\n\n  .zcjs-main-nav ul {\n    flex-direction: column;\n    padding: 0;\n    margin: 0;\n  }\n\n  .zcjs-main-nav li {\n    padding: 6px 16px;\n    border-bottom: 1px solid #eee;\n  }\n\n  .zcjs-main-nav a {\n    display: block;\n    width: 100%;\n    padding: 6px 0;\n    font-size: 15px;\n    color: #192A4E;\n  }\n  .zcjs-main-nav a:hover {\n    background-color: #f2f7f8;\n    color: #0056b3;\n  }\n\n\n  .nav-toggle:checked ~ .zcjs-container .zcjs-header-content .zcjs-main-nav {\n  display: block;\n}\n\n  .zcjs-header-content {\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n    position: relative;\n  }\n  .zcjs-header-content {\n  padding-right: 50px; \/* make room for hamburger *\/\n  position: relative;\n}\n\n@keyframes slideDownFade {\n  0% {\n    opacity: 0;\n    transform: translateY(-10px);\n  }\n  100% {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n.zcjs-main-nav {\n  overflow: hidden;\n  max-height: 0;\n  opacity: 0;\n  transform: translateY(-10px);\n  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;\n}\n\n\/* Shown state with animation *\/\n.nav-toggle:checked ~ .zcjs-container .zcjs-header-content .zcjs-main-nav {\n  max-height: 500px; \/* high enough to show full menu *\/\n  opacity: 1;\n  transform: translateY(0);\n  animation: slideDownFade 0.4s ease-in-out forwards;\n}\n.zcjs-main-nav {\n  pointer-events: none;\n}\n.nav-toggle:checked ~ .zcjs-container .zcjs-header-content .zcjs-main-nav {\n  pointer-events: auto;\n}\n\n}\n\n\n    &lt;\/style&gt;\n&lt;\/head&gt;\n&lt;body&gt;\n\n    &lt;div class=&quot;zcjs-page-container&quot;&gt;\n        \n        &lt;!-- Header --&gt;\n        &lt;header class=&quot;zcjs-main-header&quot;&gt;\n\t\t&lt;input type=&quot;checkbox&quot; id=&quot;nav-toggle&quot; class=&quot;nav-toggle&quot; hidden&gt;\n            &lt;div class=&quot;zcjs-container&quot;&gt;\n                &lt;div class=&quot;zcjs-header-content&quot;&gt;\n                    &lt;a href=&quot;&lt;%=PublicAppUrl%&gt;&quot; class=&quot;zcjs-logo&quot;&gt;\n                        &lt;img src=&quot;https:\/\/www.iowa.gov\/themes\/custom\/wildrose\/logo-iowa.svg&quot; alt=&quot;Iowa Logo&quot;&gt;\n                        &lt;span class=&quot;zcjs-logo-text&quot;&gt;&lt;span class=&quot;zcjs-separator&quot;&gt;|&lt;\/span&gt;&lt;b&gt;Support&lt;\/b&gt;.iowa.gov&lt;\/span&gt;\n                    &lt;\/a&gt;\n\t\t\t\t\t&lt;label for=&quot;nav-toggle&quot; class=&quot;nav-toggle-label&quot; aria-label=&quot;Toggle menu&quot;&gt;\n\t\t\t\t\t\t&lt;span&gt;&lt;\/span&gt;\n\t\t\t\t\t\t&lt;span&gt;&lt;\/span&gt;\n\t\t\t\t\t\t&lt;span&gt;&lt;\/span&gt;\n\t\t\t\t\t&lt;\/label&gt;\n                    &lt;nav class=&quot;zcjs-main-nav&quot;&gt;\n                        &lt;ul&gt;\n                            &lt;li&gt;&lt;a href=&quot;&lt;%=PublicAppUrl%&gt;&quot;&gt;Home&lt;\/a&gt;&lt;\/li&gt;\n\t\t\t\t\t\t\t&lt;li&gt;&lt;a href=&quot;&lt;%=PublicAppUrl%&gt;?page=about-us&quot;&gt;About Us&lt;\/a&gt;&lt;\/li&gt;\n                            &lt;li&gt;&lt;a href=&quot;https:\/\/iowa.service-now.com\/soiess\/&quot; target=&quot;_blank&quot;&gt;State Employee Service Desk&lt;\/a&gt;&lt;\/li&gt;\n                            &lt;li&gt;&lt;a href=&quot;https:\/\/iowa.service-now.com\/soiess?id=sc_cat_item&amp;sys_id=d319d4aadb8f2c9064d19b3c8a9619f5&quot; target=&quot;_blank&quot;&gt;eDiscovery Request&lt;\/a&gt;&lt;\/li&gt;\n                        &lt;\/ul&gt;\n                    &lt;\/nav&gt;\n                &lt;\/div&gt;\n            &lt;\/div&gt;\n        &lt;\/header&gt;\n\n\t\t&lt;!-- Main Content Area --&gt;\n        &lt;main class=&quot;zcjs-main&quot;&gt;\n&lt;%\n\tif(input.page == &quot;about-us&quot;)\n\t{\n\t\t%&gt;\n&lt;div class=&quot;zcs-aboutus&quot;&gt;\n\t\t\t&lt;h2&gt;ABOUT US&lt;\/h2&gt;\n\t\t\t&lt;div class=&quot;about-us-details&quot;&gt;\n\t\t\t\t&lt;p&gt;The State of Iowa Service Desk, led by the Office of the Chief Information Officer (OCIO), provides the State of Iowa and its customers a central point of contact for support with their IT needs 24 hours a day, 7 days a week.&lt;\/p&gt;\n\t\t\t\t&lt;p&gt;Most items can be handled immediately by the Service Desk. Those that cannot be resolved immediately will be routed to the appropriate support team for resolution.&lt;\/p&gt;\n\t\t\t\t&lt;p&gt;The Service Desk works closely with these teams in escalation and resolution of high priority tickets.&lt;\/p&gt;\n\t\t\t\t&lt;p&gt;There are multiple ways to contact the State of IOWA Service Desk:&lt;\/p&gt;\n\t\t\t\t&lt;ul&gt;\n\t\t\t\t\t&lt;li&gt;Online Support Available at &lt;a href=&quot;&lt;%=PublicAppUrl%&gt;&quot;&gt;support.iowa.gov&lt;\/a&gt;&lt;\/li&gt;\n\t\t\t\t\t&lt;li&gt;Phone &lt;strong&gt;(515) 281-5703&lt;\/strong&gt; or &lt;strong&gt;800-532-1174&lt;\/strong&gt;&lt;\/li&gt;\n\t\t\t\t\t&lt;li&gt;TTY Access &lt;strong&gt;800-735-2943&lt;\/strong&gt;&lt;\/li&gt;\n\t\t\t\t&lt;\/ul&gt;\n\t\t\t\t&lt;p&gt;For matters requiring immediate attention, please call the Service Desk.&lt;\/p&gt;\n\t\t\t&lt;\/div&gt;\n\t\t&lt;\/div&gt;\n&lt;%\n\t}\n\telse if(input.page == &quot;contactus&quot;)\n\t{\n\t\t%&gt;\n&lt;div class=&quot;zcs-contactus&quot;&gt;\n\t\t\t&lt;h2&gt;Contact Us&lt;\/h2&gt;\n\t\t\t&lt;div class=&quot;about-us-details&quot;&gt;\n\t\t\t\t&lt;h3&gt;General Help Questions&lt;\/h3&gt;\n\t\t\t\t&lt;p&gt;Staff can help you find the information or state agency program that can provide answers. This general help line is for non-technical questions.&lt;\/p&gt;\n\t\t\t\t&lt;ul&gt;\n\t\t\t\t\t&lt;li&gt;&lt;strong&gt;Phone:&lt;\/strong&gt; 515-281-4102&lt;\/li&gt;\n\t\t\t\t\t&lt;li&gt;&lt;strong&gt;Email:&lt;\/strong&gt; &lt;a href=&quot;mailto:information.services@iowa.gov&quot;&gt;information.services@iowa.gov&lt;\/a&gt;&lt;\/li&gt;\n\t\t\t\t&lt;\/ul&gt;\n\t\t\t\t&lt;h3&gt;Technical System Support Questions&lt;\/h3&gt;\n\t\t\t\t&lt;p&gt;The Service Desk provides technical help for password resets or unlocking accounts. Technical support is available 7 a.m. - 5 p.m. Monday through Friday except for State Holidays. Outside of regular business hours, limited support is provided by phone only. For technical system matters requiring immediate attention, please call the Service Desk.&lt;\/p&gt;\n\t\t\t\t&lt;ul&gt;\n\t\t\t\t\t&lt;li&gt;&lt;strong&gt;Technical Support Online:&lt;\/strong&gt; &lt;a href=&quot;&lt;%=PublicAppUrl%&gt;?page=requestsupport&quot; target=&quot;_blank&quot;&gt;Submit a system support request&lt;\/a&gt;&lt;\/li&gt;\n\t\t\t\t\t&lt;li&gt;&lt;strong&gt;Phone:&lt;\/strong&gt; Dial 515-281-5703 or 800-532-1174&lt;\/li&gt;\n\t\t\t\t\t&lt;li&gt;&lt;strong&gt;TTY Access Available:&lt;\/strong&gt; 800-735-2943&lt;\/li&gt;\n\t\t\t\t\t&lt;li&gt;&lt;a href=&quot;&lt;%=PublicAppUrl%&gt;&quot;&gt;&lt;strong&gt;Search our knowledge base&lt;\/strong&gt;&lt;\/a&gt;&lt;\/li&gt;\n\t\t\t\t&lt;\/ul&gt;\n\t\t\t\t&lt;h3&gt;Delivery and Mailing Address:&lt;\/h3&gt;\n\t\t\t\t&lt;p&gt;Iowa Office of the Chief Information Officer&lt;br&gt;\n\t\t\t\t200 East Grand Avenue&lt;br&gt;\n\t\t\t\tDes Moines, IA 50309&lt;\/p&gt;\n\t\t\t&lt;\/div&gt;\n\t\t&lt;\/div&gt;\n&lt;%\n\t}\n\telse if(input.page == &quot;requestsupport&quot;)\n\t{\n\t\t%&gt;\n&lt;div class=&quot;zcs-requestsupport zcs-aboutus&quot;&gt;\n&lt;h2&gt;Request Support&lt;\/h2&gt;\n&lt;div class=&quot;about-us-details&quot;&gt;\n\t\t\t&lt;div elName=&apos;zc-component&apos; formLinkName=&apos;Request_Support&apos; params=&apos;zc_Header=false&amp;zc_SuccMsg=Data Added Successfully!&amp;zc_SubmitVal=Submit&amp;zc_ResetVal=Reset&amp;privatelink=sJjORm3NMrVFBCm3UrMBp69Q48qqh5QG7gK2hx5jjED8TRbC0ASQuuDFk81dtkUAEFzBAGF89wjQD7FqbkRV4CYDzf7P2wFGO4dY&apos;&gt;Loading Form...&lt;\/div&gt;\n\t\t&lt;\/div&gt;\n\t\t&lt;\/div&gt;\n&lt;%\n\t}\n\telse\n\t{\n\t\t%&gt;\n&lt;!-- Hero Section --&gt;\n            &lt;section class=&quot;zcjs-hero-section&quot;&gt;\n\t\t\t\t&lt;div class=&quot;zcjs-center&quot;&gt;\n\t\t\t\t\t&lt;h1&gt;Welcome&lt;\/h1&gt;\n\t\t\t\t\t&lt;p&gt;How can we help you today ?&lt;\/p&gt;\n\t\t\t\t&lt;\/div&gt;\n            &lt;\/section&gt;\n\n            &lt;!-- Search Section --&gt;\n            &lt;section class=&quot;zcjs-search-section&quot;&gt;\n                &lt;div class=&quot;zcjs-container&quot;&gt;\n\t\t\t\t\t&lt;div class=&quot;zcs-widget&quot; elName=&apos;zc-component&apos; pageLinkName=&apos;Search_Widget&apos; params=&apos;privatelink=wagE8SFm7OMyCtP1C0rVe2QBnzOwTUEsHeztTFdrN4bK7PTrWgVJYMevSShegffjPatpHqgGkkMT4NyJZz8Gjar7WkKYWz4wmxyn&apos;&gt;&lt;\/div&gt;\n                &lt;\/div&gt;\n            &lt;\/section&gt;\n            \n            &lt;!-- Cards Section --&gt;\n            &lt;section class=&quot;zcjs-cards-section&quot;&gt;\n                &lt;div class=&quot;zcjs-container&quot;&gt;\n                    &lt;div class=&quot;zcjs-cards-container&quot;&gt;\n\n\t\t\t\t\t\t&lt;a href=&quot;&lt;%=PublicAppUrl%&gt;?page=requestsupport&quot; class=&quot;zcjs-card-link&quot;&gt;\n\t\t\t\t\t\t\t&lt;div class=&quot;zcjs-info-card&quot;&gt;\n\t\t\t\t\t\t\t\t&lt;img src=&quot;https:\/\/creatorapp.zohopublic.in\/file\/girimservices_in_zohotest\/help-iowa\/All_Images\/276743000001859003\/Image\/download\/7w1xBEF6OtuQp9Fhr8KN7eKANSwmCjjgYwKjDwwOdZMjy3qGHm6Kx876RYBBksR3Uqq1yUJMMSCT9ww3kvdTUef2thvEYxz7Ek0U?filepath=\/1749813331410390_9d29d4e375daf00aa105327ccadf8c85b0963bcb.png&quot; class=&quot;zcjs-card-image&quot;&gt;\n\t\t\t\t\t\t\t\t&lt;div class=&quot;zcjs-card-header&quot;&gt;\n\t\t\t\t\t\t\t\t\t&lt;h2 class=&quot;zcjs-card-title&quot;&gt;Request Support&lt;\/h2&gt;\n\t\t\t\t\t\t\t\t&lt;\/div&gt;\n\t\t\t\t\t\t\t\t&lt;div class=&quot;zcjs-card-content&quot;&gt;\n\t\t\t\t\t\t\t\t\t&lt;p&gt;Report a problem&lt;\/p&gt;\n\t\t\t\t\t\t\t\t\t&lt;p&gt;Submit a Support Request&lt;\/p&gt;\n\t\t\t\t\t\t\t\t&lt;\/div&gt;\n\t\t\t\t\t\t\t&lt;\/div&gt;\n\t\t\t\t\t\t&lt;\/a&gt;\n\n\t\t\t\t\t\t&lt;a href=&quot;https:\/\/www.iowa.gov\/chat&quot; class=&quot;zcjs-card-link&quot; target=&quot;_blank&quot;&gt;\n\t\t\t\t\t\t\t&lt;div class=&quot;zcjs-info-card&quot;&gt;\n\t\t\t\t\t\t\t\t&lt;img src=&quot;https:\/\/creatorapp.zohopublic.in\/file\/girimservices_in_zohotest\/help-iowa\/All_Images\/276743000001871709\/Image\/download\/7w1xBEF6OtuQp9Fhr8KN7eKANSwmCjjgYwKjDwwOdZMjy3qGHm6Kx876RYBBksR3Uqq1yUJMMSCT9ww3kvdTUef2thvEYxz7Ek0U?filepath=\/1750055449648339_got_questions.jpg&quot; alt=&quot;Paper cutouts of question marks&quot; class=&quot;zcjs-card-image&quot;&gt;\n\t\t\t\t\t\t\t\t&lt;div class=&quot;zcjs-card-header&quot;&gt;\n\t\t\t\t\t\t\t\t\t&lt;h2 class=&quot;zcjs-card-title&quot;&gt;Got Questions?&lt;\/h2&gt;\n\t\t\t\t\t\t\t\t&lt;\/div&gt;\n\t\t\t\t\t\t\t\t&lt;div class=&quot;zcjs-card-content&quot;&gt;\n\t\t\t\t\t\t\t\t\t&lt;p&gt;Ask a State Librarian&lt;\/p&gt;\n\t\t\t\t\t\t\t\t\t&lt;p&gt;Monday to Friday | 08:00 AM - 04:30 PM&lt;\/p&gt;\n\t\t\t\t\t\t\t\t&lt;\/div&gt;\n\t\t\t\t\t\t\t&lt;\/div&gt;\n\t\t\t\t\t\t&lt;\/a&gt;\n\n\t\t\t\t\t\t&lt;a href=&quot;https:\/\/sites.google.com\/a\/iowa.gov\/googlehelp\/home&quot; class=&quot;zcjs-card-link&quot; target=&quot;_blank&quot;&gt;\n\t\t\t\t\t\t\t&lt;div class=&quot;zcjs-info-card&quot;&gt;\n\t\t\t\t\t\t\t\t&lt;img src=&quot;https:\/\/creatorapp.zohopublic.in\/file\/girimservices_in_zohotest\/help-iowa\/All_Images\/276743000001859007\/Image\/download\/7w1xBEF6OtuQp9Fhr8KN7eKANSwmCjjgYwKjDwwOdZMjy3qGHm6Kx876RYBBksR3Uqq1yUJMMSCT9ww3kvdTUef2thvEYxz7Ek0U?filepath=\/1749813377214690_d8e9f1aca04a54cc7f31577b028a6a7cc84ba411.png&quot; alt=&quot;Google logo on a screen&quot; class=&quot;zcjs-card-image&quot;&gt;\n\t\t\t\t\t\t\t\t&lt;div class=&quot;zcjs-card-header&quot;&gt;\n\t\t\t\t\t\t\t\t\t&lt;h2 class=&quot;zcjs-card-title&quot;&gt;Google Support&lt;\/h2&gt;\n\t\t\t\t\t\t\t\t&lt;\/div&gt;\n\t\t\t\t\t\t\t\t&lt;div class=&quot;zcjs-card-content&quot;&gt;\n\t\t\t\t\t\t\t\t\t&lt;p&gt;For State Employees&lt;\/p&gt;\n\t\t\t\t\t\t\t\t\t&lt;p&gt;(515) 281-5703 | (800) 532-1174&lt;\/p&gt;\n\t\t\t\t\t\t\t\t&lt;\/div&gt;\n\t\t\t\t\t\t\t&lt;\/div&gt;\n\t\t\t\t\t\t&lt;\/a&gt;\n\n                    &lt;\/div&gt;\n                &lt;\/div&gt;\n            &lt;\/section&gt;\n&lt;%\n\t}\n\t%&gt;\n&lt;\/main&gt;\n\n\t\t&lt;!-- Footer --&gt;\n        &lt;footer class=&quot;zcjs-main-footer&quot;&gt;\n            &lt;div class=&quot;zcjs-footer-container&quot;&gt;\n                &lt;div class=&quot;zcjs-footer-content&quot;&gt;\n                    &lt;nav class=&quot;zcjs-footer-links&quot;&gt;\n                        &lt;a href=&quot;http:\/\/iowa.gov\/&quot;&gt;State of Iowa&lt;\/a&gt;\n                        &lt;span&gt;|&lt;\/span&gt;\n                        &lt;a href=&quot;http:\/\/iowa.gov\/pages\/policies&quot; target=&quot;_blank&quot;&gt;Policies&lt;\/a&gt;\n\t\t\t\t\t\t&lt;span&gt;|&lt;\/span&gt;\n                        &lt;a href=&quot;http:\/\/get.adobe.com\/reader&quot; target=&quot;_blank&quot;&gt;Adobe PDF Reader&lt;\/a&gt;\n                        &lt;span&gt;|&lt;\/span&gt;\n                        &lt;a href=&quot;&lt;%=PublicAppUrl%&gt;?page=contactus&quot;&gt;Contact Us&lt;\/a&gt;\n\t\t\t\t\t\t&lt;span&gt;|&lt;\/span&gt;\n                        &lt;a href=&quot;https:\/\/directory.iowa.gov\/organization\/index&quot; target=&quot;_blank&quot;&gt;Agencies A-Z&lt;\/a&gt;\n\t\t\t\t\t\t&lt;span&gt;|&lt;\/span&gt;\n                        &lt;a href=&quot;https:\/\/directory.iowa.gov\/service\/index&quot; target=&quot;_blank&quot;&gt;Programs &amp; Services&lt;\/a&gt;\n                    &lt;\/nav&gt;\n                    &lt;div class=&quot;zcjs-copyright&quot;&gt;\n\t\t\t\t\t\t\u00A9 &lt;%=zoho.currentdate.getYear()%&gt; State of Iowa\n                    &lt;\/div&gt;\n                &lt;\/div&gt;\n            &lt;\/div&gt;\n        &lt;\/footer&gt;\n\t\t\n    &lt;\/div&gt;\n\n&lt;\/body&gt;\n&lt;\/html&gt;\n&lt;%\n\n}%&gt;]]>\n<\/dsp>\n<\/column>\n<\/row>\n<\/layout>\n<\/zml>"
+		}
+		page Home_V2(string page)
+		{
+			displayname = "Home V2"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<dsp id='html_snippet1' elementName=\"HTML Snippet\"\n bgColor=\"#FFFFFF\" \n>\n\t<![CDATA[htmlpage html_snippet1()\ncontent\n&lt;%{\n\tPublicAppUrl = &quot;https:\/\/creatorapp.zohopublic.in\/girimservices_in_zohotest\/help-iowa\/page-perma\/Home\/fMnQZRVWtnzTSYgWdJPZ3j5Tp2a7gEf81M3kbsPaMDZNHF6FdJK1YVfBkdtYfuOeDHXjqsuOKAVdXVm1fqpEXVjvVBUWh8OT0vsq&quot;;\n\tkeyboard_and_headset = Supporting_Images[ID == 2];\n\tgoogle_support = Supporting_Images[ID == 4];\n\t%&gt;\n&lt;style&gt;\n\t\t* {\n\t\t\tbox-sizing: border-box;\n\t\t}\n\t\t.column-container .zc-pb-tile-container\n\t\t{\n\t\t\tpadding:0px;\n\t\t}\n\t\t.zc-pb-page-content-wrapper .elemContainment\n\t\t{\n\t\t\tpadding:0px;\n\t\t}\n\t\t[id^=&quot;Search_Widget_ZC&quot;] {\n            overflow: hidden !important;\n        }\n        .zcs-body {\n            display: flex;\n            flex-direction: column;\n\t\t\tmin-height: 100vh;\n\t\t\tmax-width: 100vw;\n\t\t\toverflow-x: hidden;\n        }\n\t\t.zcs-container {\n\t\t\tflex: 1; \/* Take available height so footer stays down *\/\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\theight: 85%; \/* Full height *\/\n\t\t\tbackground-image: \n\t\t\tlinear-gradient(rgba(204, 204, 204, 0.4) 1px, transparent 1px),\n\t\t\tlinear-gradient(90deg, rgba(230, 230, 230, 0.4) 1px, transparent 1px);\n\t\t\tbackground-size: 40px 40px;\n\t\t}\n\t\t.zcs-header {\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: space-between;\n\t\t\talign-items: center;\n\t\t\tpadding: 0px 20px;\n\t\t\tbackground-color: #FFFFFF;\n\t\t\toverflow: hidden; \/* Prevents overflow *\/\n\t\t\tflex-wrap: wrap;\n\t\t\twidth: 100%;\n\t\t\tmax-width: 100%;\n\t\t}\n\t\t.zcs-header-data{\n\t\t\tpadding: 20px;\n\t\t\tfont-size: 1.3em;\n\t\t}\n\t\t.zcs-header-data.left {\n\t\t\tfont-size: 2em;\n\t\t\tflex: 1 1 auto;\n\t\t\tmin-width: 0; \/* Prevent overflow in flexbox *\/\n\t\t\tdisplay: flex;\n\t\t\tflex-wrap: wrap;\n\t\t\talign-items: center;\n\t\t}\n\t\t.zcs-header-data.right {\n\t\t\tdisplay: flex;\n\t\t\tgap: 10px;\n\t\t\tflex: 1 1 auto;\n\t\t\tmin-width: 0;\n\t\t\tflex-wrap: wrap;\n\t\t\tjustify-content: flex-end;\n\t\t}\n\t\t.zcs-header-data.right a {\n\t\t\tcolor:black;\n\t\t\ttext-decoration: none;\n\t\t\tpadding: 10px 15px;\n\t\t\tborder-radius: 4px;\n\t\t\ttransition: background-color 0.3s ease;\n\t\t\twhite-space: nowrap; \/* Prevent text wrapping in menu items *\/\n\t\t}\n\t\t.zcs-header-data.right a:hover {\n\t\t\tbackground-color: #03617a;\n\t\t\tcolor:white;\n\t\t}\n\t\t.zcs-header-logo {\n\t\t\tposition: relative;  \/* Needed for absolute :after to work properly *\/\n\t\t\toverflow: hidden;    \/* Prevent it from overflowing *\/\n\t\t}\n\t\t.zcs-header-img {\n\t\t\theight: 23px;\n\t\t}\n\t\t.zcs-menu-toggle {\n\t\t\tdisplay: none;\n\t\t}\n\t\t.zcs-menu-icon {\n\t\t\tdisplay: none;\n\t\t\tfont-size: 2em;\n\t\t\tcursor: pointer;\n\t\t\tcolor: white;\n\t\t\tpadding: 10px;\n\t\t}\n\t\t.zcs-hyperlink-1{\n\t\t\tfont-weight: 700;\n\t\t\ttext-decoration: none; \/* Optional: Removes underline from the link *\/\n\t\t\ttransition: all 0.3s ease; \/* Smooth transition for hover effect *\/\n\t\t}\n\t\t.zcs-hyperlink-1:hover{\n\t\t\tbackground-color: rgba(255, 255, 255, 0.3); \/* Light white background on hover *\/\n\t\t\tborder-radius: 4px; \/* Optional: Adds rounded corners *\/\n\t\t\tpadding: 5px; \/* Optional: Adds space around the text to make the highlight effect more visible *\/\n\t\t}\n\t\t.zcs-hyperlink-2{\n\t\t\ttext-decoration: none; \/* Optional: Removes underline from the link *\/\n\t\t\ttransition: all 0.3s ease; \/* Smooth transition for hover effect *\/\n\t\t}\n\t\t.zcs-hyperlink-2:hover{\n\t\t\tbackground-color: rgba(255, 255, 255, 0.3); \/* Light white background on hover *\/\n\t\t\tborder-radius: 4px; \/* Optional: Adds rounded corners *\/\n\t\t\tpadding: 5px; \/* Optional: Adds space around the text to make the highlight effect more visible *\/\n\t\t}\n    &lt;\/style&gt;\n    &lt;div class=&quot;zcs-body&quot;&gt;\n\t\t&lt;div class=&quot;zcs-container&quot;&gt;\n\t\t\t&lt;div class=&quot;zcs-header&quot;&gt;\n\t\t\t\t&lt;div class=&quot;zcs-header-data left&quot;&gt;&lt;div class=&quot;zcs-header-logo&quot;&gt;&lt;a href=&quot;&lt;%=PublicAppUrl%&gt;&quot;&gt;&lt;img class=&quot;zcs-header-img&quot; src=&quot;https:\/\/www.iowa.gov\/themes\/custom\/wildrose\/logo-iowa.svg&quot; alt=&quot;Iowa Logo&quot;&gt;&lt;\/a&gt;&lt;\/div&gt;&lt;b&gt;Support&lt;\/b&gt;&lt;span style=&quot;font-weight: 200;&quot;&gt;.iowa.gov&lt;\/span&gt;&lt;\/div&gt;\n\t\t\t\t&lt;input type=&quot;checkbox&quot; id=&quot;menu-toggle&quot; class=&quot;zcs-menu-toggle&quot; \/&gt;\n\t\t\t\t&lt;label for=&quot;menu-toggle&quot; class=&quot;zcs-menu-icon&quot;&gt;&amp;#9776;&lt;\/label&gt; &lt;!-- Hamburger icon --&gt;\n\t\t\t\t&lt;div class=&quot;zcs-header-data right zcs-menu&quot;&gt;\n\t\t\t\t\t&lt;a href=&quot;&lt;%=PublicAppUrl%&gt;&quot;&gt;Home&lt;\/a&gt;\n\t\t\t\t\t&lt;a href=&quot;&lt;%=PublicAppUrl%&gt;?page=about-us&quot;&gt;About Us&lt;\/a&gt;\n\t\t\t\t\t&lt;a href=&quot;https:\/\/iowa.service-now.com\/soiess\/&quot;&gt;State Employee Service Desk&lt;\/a&gt;\n\t\t\t\t\t&lt;a href=&quot;https:\/\/iowa.service-now.com\/soiess?id=sc_cat_item&amp;sys_id=d319d4aadb8f2c9064d19b3c8a9619f5&quot;&gt;eDiscovery Request&lt;\/a&gt;\n\t\t\t\t&lt;\/div&gt;\n\t\t\t&lt;\/div&gt;\n\t\t&lt;\/div&gt;\n    &lt;\/div&gt;\n&lt;%\n\n}%&gt;]]>\n<\/dsp>\n<\/column>\n<\/row>\n<\/layout>\n<\/zml>"
+		}
+	}
+
+
+		 functions
+		 {
+			 Deluge
+			 {
+				 string BackgroundImage()
+                 {
+                 	Image = Supporting_Images[ImageID == 1];
+                 	if(Image.count() > 0)
+                 	{
+                 		BaseUrl = Image.Image.getprefix("\" lowqual").getsuffix("\"");
+                 		BGImage = BaseUrl.replaceAll("creator.zoho.","creatorapp.zohopublic.").replaceAll("/sharedBy/appLinkName/","/file" + zoho.appuri).replaceAll("viewLinkName","All_Images/" + Image.ID).replaceAll("fieldName/image","Image/download/7w1xBEF6OtuQp9Fhr8KN7eKANSwmCjjgYwKjDwwOdZMjy3qGHm6Kx876RYBBksR3Uqq1yUJMMSCT9ww3kvdTUef2thvEYxz7Ek0U?filepath=");
+                 	}
+                 	return BGImage;
+                 }
+				 void Image.test()
+                 {
+                 	//1749813377214690_d8e9f1aca04a54cc7f31577b028a6a7cc84ba411.png
+                 	google_support = Supporting_Images[ImageID == 3];
+                 	info google_support.ID;
+                 	info google_support.Image;
+                 }
+				 void SDP.Add_Incident(int reqid)
+                 {
+                 	RequestDetails = Request_Support[ID == reqid];
+                 	if(RequestDetails.count() > 0)
+                 	{
+                 		dataMap = Map();
+                 		dataList = List();
+                 		cmAttributesMap = Map();
+                 		cmAttributesMap.put("txt_name","Creator Testing");
+                 		cmMap = Map();
+                 		cmMap.put("cm_attributes",cmAttributesMap);
+                 		dataList.add(cmMap);
+                 		data = Map();
+                 		data.put("cm_sdp_testing",dataList);
+                 		dataMap.put("input_data",data);
+                 		// cm_sdp_testing is the Form Name
+                 		// txt_name is the field name
+                 		// Creator Testing is the field value
+                 		sdpCreate = invokeurl
+                 		[
+                 			url :"https://sdpondemand.manageengine.com/app/education/api/v3/cm_sdp_testing"
+                 			type :POST
+                 			parameters:dataMap
+                 			headers:thisapp.SDP.GenerateOauth()
+                 		];
+                 		info sdpCreate;
+                 	}
+                 }
+				 map SDP.GenerateOauth()
+                 {
+                 	// 	sdp_Authorization = "Zoho-oauthtoken 1000.6JBUTU6LI4J9JP72NNLKDZWJ8X1E0H.9c7098e97dac718ba69a2f63a55ccd4586e7d84058";
+                 	headersMap = Map();
+                 	headersMap.put("Accept","application/vnd.manageengine.sdp.v3+json");
+                 	headersMap.put("Content-Type","application/x-www-form-urlencoded");
+                 	// 	Client_ID: 1000.SAZW8J8M9MM40Z50VPGAPM5T9OJMSD
+                 	// 	Client Secret: ef60485003577fab36108969eb0779bbc056f78741
+                 	// 	Redirecturi: http://www.zoho.com/oauth2callback
+                 	// 	Access Token: 1000.338f11739f026ac7cf473e3f85cbd130.b01364bae0e3244c80b1150a43782ad0
+                 	// 	Refresh Token: 1000.3f369fa4da067aa9a041780e7cccdde8.6d2152a8a2b70976cff81d2acd9f62a8
+                 	// 	Scope:SDPOnDemand.requests.ALL,SDPOnDemand.custommodule.ALL
+                 	TokenResponse = invokeurl
+                 	[
+                 		url :"https://accounts.zoho.com/oauth/v2/token?refresh_token=1000.3f369fa4da067aa9a041780e7cccdde8.6d2152a8a2b70976cff81d2acd9f62a8&client_id=1000.SAZW8J8M9MM40Z50VPGAPM5T9OJMSD&client_secret=ef60485003577fab36108969eb0779bbc056f78741&grant_type=refresh_token"
+                 		type :POST
+                 	];
+                 	//{"access_token":"1000.b8151200e89a79afaece4516c7ff6340.f0e56b3f2fa1d25c9c055c649466d561","scope":"SDPOnDemand.requests.ALL SDPOnDemand.custommodule.ALL","api_domain":"https://www.zohoapis.com","token_type":"Bearer","expires_in":3600}
+                 	info TokenResponse.getJSON("access_token");
+                 	headersMap.put("Authorization","Zoho-oauthtoken " + TokenResponse.getJSON("access_token"));
+                 	return headersMap;
+                 }
+			 }
+		 }
+		workflow
+		{
+		form
+		{
+			Add_Incident_to_SDP as "Add Incident to SDP"
+			{
+				type =  form
+				form = Request_Support
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											thisapp.SDP.Add_Incident(input.ID);
+						)
+					}
+				}
+
+			}
+		}
+
+
+
+
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+
+	web
+	{
+		forms
+		{
+			form Employee
+			{
+				label placement = left
+			}
+			form Epayment_Setup_Request
+			{
+				label placement = left
+			}
+			form Firewall_Conduit_ACL_Requirements
+			{
+				label placement = left
+			}
+			form New_Server_Setup
+			{
+				label placement = left
+			}
+			form Operating_System_Type
+			{
+				label placement = left
+			}
+			form Products
+			{
+				label placement = left
+			}
+			form Request_Support
+			{
+				label placement = left
+			}
+			form Search
+			{
+				label placement = labelinplace
+			}
+			form Service_Catalog_Request
+			{
+				label placement = left
+			}
+			form Supporting_Images
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report Request_Support_Report
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								First_Name as "First Name"
+								Last_Name as "Last Name"
+								Email
+								Phone_Number as "Phone Number"
+								Description
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								First_Name as "First Name"
+								Last_Name as "Last Name"
+								Email
+								Phone_Number as "Phone Number"
+								Description
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+    				)
+				)
+			}
+			report All_Images
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								Image
+								ImageID
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								Image
+								ImageID
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+    				)
+				)
+			}
+			report All_Epayment_Setup_Requests
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								Agency
+								Functionality_needed as "Functionality needed?"
+								Biller_ID as "Biller ID"
+								Application_ID as "Application ID"
+								Name_of_Application as "Name of Application"
+								eDAS_Billing_Code as "eDAS Billing Code"
+								The_1_50_fees_to_be_paid_by as "The $1.50 fees to be paid by?"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								Agency
+								Functionality_needed as "Functionality needed?"
+								Biller_ID as "Biller ID"
+								Application_ID as "Application ID"
+								Name_of_Application as "Name of Application"
+								eDAS_Billing_Code as "eDAS Billing Code"
+								The_1_50_fees_to_be_paid_by as "The $1.50 fees to be paid by?"
+								Credit_card_charges_to as "Credit card charges to?"
+								Additional_comments as "Additional comments"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+    				)
+				)
+			}
+			report All_Products
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								Product_Title as "Product Title"
+								Anticipated_Annual_Volume as "Anticipated Annual Volume"
+								Agency_Code as "Agency Code"
+								Revenue
+								Fund
+								Organization
+								Epayment_Setup_Request as "Epayment Setup Request"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								Product_Title as "Product Title"
+								Anticipated_Annual_Volume as "Anticipated Annual Volume"
+								Agency_Code as "Agency Code"
+								Revenue
+								Fund
+								Organization
+								Unit_Code as "Unit Code"
+								Subunit_Code as "Subunit Code"
+								Epayment_Setup_Request as "Epayment Setup Request"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+    				)
+				)
+			}
+			report All_Service_Catalog_Requests
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								Department
+								Division
+								Primary_Contact_Name as "Primary Contact Name"
+								Phone_Number as "Phone"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								Department
+								Division
+								Primary_Contact_Name as "Primary Contact Name"
+								Phone_Number as "Phone"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+    				)
+				)
+			}
+			report All_New_Server_Setups
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								Requester
+								Agency
+								Project_Name as "Project Name"
+								Project_Manager_Name as "Project Manager Name"
+								Project_Manager_Contact as "Project Manager Contact"
+								Describe_the_project_the_server_will_be_used_for as "Describe the project the server will be used for"
+								eDas_Billing_Code as "eDas Billing Code"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								Requester
+								Agency
+								Project_Name as "Project Name"
+								Project_Manager_Name as "Project Manager Name"
+								Project_Manager_Contact as "Project Manager Contact"
+								Describe_the_project_the_server_will_be_used_for as "Describe the project the server will be used for"
+								eDas_Billing_Code as "eDas Billing Code"
+								Requested_Completion_Date as "Requested Completion Date"
+								Active_Directory_Domain as "Active Directory Domain"
+								Please_explain_if_the_current_version_of_the_OS_can_t_be_used_or_if_you_selected_other as "Please explain if the current version of the OS can't be used or if you selected other."
+								CPU_Count_1_16 as "CPU Count (1-16)"
+								Memory_GB as "Memory (GB)"
+								Disk_space_needed_for_application_and_data as "Disk space needed for application and data"
+								Operating_System_Type as "Operating System Type"
+								What_environment_should_this_server_be_created_for as "What environment should this server be created for?"
+								Network_VLAN_ID_if_known as "Network VLAN ID (if known)"
+								Technical_Point_of_Contact_for_the_project as "Technical Point of Contact for the project"
+								Contact_Email as "Contact Email"
+								Contact_Phone_Number as "Contact Phone Number"
+								Developer_Contact_for_the_project as "Developer Contact for the project"
+								Contact_Email_developer as "Contact Email"
+								Contact_Phone_Number_developer as "Contact Phone Number"
+								Is_there_sensitive_data_involved as "Is there sensitive data involved?"
+								Please_explain_the_type_of_sensitive_data_involved as "Please explain the type of sensitive data involved."
+								Describe_the_applications_or_services_that_will_be_hosted_on_the_server as "Describe the applications or services that will be hosted on the server."
+								List_all_accounts_requiring_administrative_server_access as "List all accounts requiring administrative server access"
+								Other_users_that_need_to_have_access_to_the_server as "Other users that need to have access to the server"
+								Data_Retention_Requirements as "Data Retention Requirements"
+								Does_this_server_need_to_be_backed_up as "Does this server need to be backed up?"
+								Additional_Requirements as "Additional Requirements"
+								Desired_Hostname as "Desired Hostname"
+								Attach_additional_requirements_from_Vendor as "Attach additional requirements from Vendor"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+    				)
+				)
+			}
+			report All_Employees
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								Name
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								Name
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+    				)
+				)
+			}
+			report All_Operating_System_Types
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								Operating_System_Type as "Operating System Type"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								Operating_System_Type as "Operating System Type"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+    				)
+				)
+			}
+			report All_Firewall_Conduit_acl_Requirements
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								Source
+								Destination_IP_s as "Destination IP's"
+								Destination_Ports as "Destination Ports"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								Source
+								Destination_IP_s as "Destination IP's"
+								Destination_Ports as "Destination Ports"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+    				)
+				)
+			}
+		}
+		menu
+		{
+			unused
+			{
+				systemcomponent
+				{
+					type = approval
+					approval status = pending
+					displayname = "Pending Tasks"
+					icon = "ui-2-hourglass"
+				}
+				systemcomponent
+				{
+					type = approval
+					approval status = completed
+					displayname = "Completed Tasks"
+					icon = "design-todo"
+				}
+				form  Request_Support
+				{
+					icon = "tech-desktop"
+				}
+				page Search_Widget
+				{
+					icon = "users-2-search"
+				}
+				form  Supporting_Images
+				{
+					icon = "design-image"
+				}
+				form  Search
+				{
+					icon = "tech-desktop"
+				}
+			}
+			space Space
+			{
+				displayname = "Space"
+				icon = "tech-desktop"
+
+				section Support_iowa
+				{
+					displayname = "Support iowa"
+					icon = "tech-desktop"
+					page helpiowa_v3
+					{
+						icon = "tech-desktop"
+					}
+					page Home
+					{
+						icon = "users-2-home"
+					}
+					page Home_V2
+					{
+						icon = "users-2-home"
+					}
+				}
+				section Request_Support
+				{
+					displayname = "Request Support"
+					icon = "tech-desktop"
+					report Request_Support_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Images
+				{
+					displayname = "Images"
+					icon = "design-image"
+					report All_Images
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "tech-desktop"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Connection"
+						icon = "tech-2-connection"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+				section Epayment_Setup_Requests
+				{
+					displayname = "Epayment Setup Requests"
+					icon = "users-2-contacts-44"
+					form  Epayment_Setup_Request
+					{
+						icon = "users-2-contacts-44"
+					}
+					report All_Epayment_Setup_Requests
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Products
+				{
+					displayname = "Products"
+					icon = "shopping-gift"
+					form  Products
+					{
+						icon = "shopping-gift"
+					}
+					report All_Products
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Service_Catalog_Requests
+				{
+					displayname = "Service Catalog Requests"
+					icon = "tech-ram"
+					form  Service_Catalog_Request
+					{
+						icon = "business-scale"
+					}
+					report All_Service_Catalog_Requests
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section New_Server_Setups
+				{
+					displayname = "New Server Setups"
+					icon = "tech-2-l-settings"
+					form  New_Server_Setup
+					{
+						icon = "tech-2-p-system-update"
+					}
+					report All_New_Server_Setups
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Employees
+				{
+					displayname = "Employees"
+					icon = "users-single-04"
+					form  Employee
+					{
+						icon = "business-business-contact-89"
+					}
+					report All_Employees
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Operating_System_Types
+				{
+					displayname = "Operating System Types"
+					icon = "tech-laptop"
+					form  Operating_System_Type
+					{
+						icon = "tech-laptop"
+					}
+					report All_Operating_System_Types
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Firewall_Conduit_acl_Requirements
+				{
+					displayname = "Firewall Conduit/acl Requirements"
+					icon = "tech-2-firewall"
+					form  Firewall_Conduit_ACL_Requirements
+					{
+						icon = "tech-2-firewall"
+					}
+					report All_Firewall_Conduit_acl_Requirements
+					{
+						icon = "tech-desktop"
+					}
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+				}
+			}
+		}
+		customize
+		{
+			new theme = 11
+			font = "lato"
+			color options
+			{
+				color = blue
+			}
+			logo
+			{
+				preference = "none"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form Employee
+			{
+				label placement = auto
+			}
+			form Epayment_Setup_Request
+			{
+				label placement = auto
+			}
+			form Firewall_Conduit_ACL_Requirements
+			{
+				label placement = auto
+			}
+			form New_Server_Setup
+			{
+				label placement = auto
+			}
+			form Operating_System_Type
+			{
+				label placement = auto
+			}
+			form Products
+			{
+				label placement = auto
+			}
+			form Request_Support
+			{
+				label placement = auto
+			}
+			form Search
+			{
+				label placement = auto
+			}
+			form Service_Catalog_Request
+			{
+				label placement = auto
+			}
+			form Supporting_Images
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "1"
+			color options
+			{
+				color = darkgrey
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form Employee
+			{
+				label placement = auto
+			}
+			form Epayment_Setup_Request
+			{
+				label placement = auto
+			}
+			form Firewall_Conduit_ACL_Requirements
+			{
+				label placement = auto
+			}
+			form New_Server_Setup
+			{
+				label placement = auto
+			}
+			form Operating_System_Type
+			{
+				label placement = auto
+			}
+			form Products
+			{
+				label placement = auto
+			}
+			form Request_Support
+			{
+				label placement = auto
+			}
+			form Search
+			{
+				label placement = auto
+			}
+			form Service_Catalog_Request
+			{
+				label placement = auto
+			}
+			form Supporting_Images
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "1"
+			color options
+			{
+				color = darkgrey
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}

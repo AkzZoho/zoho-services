@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creator DS Analyser</title>
+    <meta name="description" content="Analyse Zoho Creator .ds exports against requirement documents and produce an actionable change plan for PMs and Developers." />
+    <!-- Custom inline SVG favicon — mirrors <LogoMark/> so no external asset is needed -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect x=%221.5%22 y=%221.5%22 width=%2229%22 height=%2229%22 rx=%227%22 fill=%22%234338ca%22/><path d=%22M8.5 10.5h4.8c2.7 0 4.7 2 4.7 5.5s-2 5.5-4.7 5.5H8.5v-11Z%22 stroke=%22white%22 stroke-width=%222%22 fill=%22none%22 stroke-linejoin=%22round%22/><path d=%22M23.5 12.2c-.5-1.1-1.7-1.8-3-1.8-1.7 0-3 1-3 2.5 0 3 6.2 1.5 6.2 4.8 0 1.7-1.5 2.9-3.5 2.9-1.7 0-3.1-.8-3.7-2%22 stroke=%22white%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22/></svg>'
+    />
+    <!-- Pre-paint theme script: avoid light-theme flash on first load when user prefers dark. -->
+    <script>
+      (function () {
+        try {
+          var key = 'ds-analyser.theme';
+          var t = localStorage.getItem(key);
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark' : 'light';
+          }
+          document.documentElement.classList.toggle('dark', t === 'dark');
+          document.documentElement.style.colorScheme = t;
+        } catch (_) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

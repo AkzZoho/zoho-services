@@ -1,0 +1,20 @@
+{
+  "project": {
+    "name": "creator-ds-analyser",
+    "id": ""
+  },
+  "functions": [
+    {
+      "name": "ds-analyzer",
+      "type": "advancedio",
+      "stack": "node18",
+      "source": "functions/ds-analyzer",
+      "main": "src/index.js",
+      "memory": 512,
+      "timeout": 120
+    }
+  ],
+  "client": {
+    "source": "client/dist"
+  }
+}

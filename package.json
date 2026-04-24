@@ -1,0 +1,21 @@
+{
+  "name": "creator-ds-analyser",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Zoho Creator DS + Requirement document analyser (Catalyst-hosted)",
+  "workspaces": [
+    "client",
+    "functions/ds-analyzer"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm --prefix client install && npm --prefix functions/ds-analyzer install",
+    "dev:server": "npm --prefix functions/ds-analyzer run dev",
+    "dev:client": "npm --prefix client run dev",
+    "test": "npm --prefix functions/ds-analyzer test",
+    "build": "npm --prefix client run build",
+    "lint": "npm --prefix functions/ds-analyzer run lint && npm --prefix client run lint"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

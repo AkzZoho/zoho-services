@@ -1,0 +1,38 @@
+{
+  "name": "ds-analyzer",
+  "version": "0.1.0",
+  "description": "Catalyst Advanced I/O function — parses Zoho Creator .ds + requirement docs and produces a change list",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/index.js",
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch",
+    "lint": "eslint src --ext .js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
+    "multer": "^1.4.5-lts.1",
+    "adm-zip": "^0.5.12",
+    "fast-xml-parser": "^4.3.6",
+    "pdf-parse": "^1.1.1",
+    "mammoth": "^1.7.1",
+    "axios": "^1.7.2",
+    "zod": "^3.23.8",
+    "dotenv": "^16.4.5",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.3.1",
+    "openai": "^4.52.0",
+    "@anthropic-ai/sdk": "^0.24.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0",
+    "nodemon": "^3.1.0",
+    "eslint": "^8.57.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

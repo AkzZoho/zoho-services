@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Build outputs
+dist/
+build/
+*.log
+
+# Catalyst
+.catalyst/
+.catalystrc
+catalyst-logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Test artifacts
+coverage/
+.nyc_output/
+
+# Uploads (local dev)
+uploads/
+tmp/
