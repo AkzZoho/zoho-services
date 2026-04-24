@@ -2,10 +2,9 @@
 node_modules/
 **/node_modules/
 
-# Build output
-client/dist/
+# Build output (dist is committed so Catalyst can serve the frontend without a build step)
+# client/dist/   <-- intentionally NOT ignored; Catalyst reads from client/dist
 client/build/
-**/dist/
 
 # Env & secrets — NEVER commit
 .env

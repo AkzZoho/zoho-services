@@ -9,7 +9,7 @@ node_modules/
 !.env.example
 
 # Build outputs
-dist/
+# dist/ intentionally NOT ignored at root — client/dist is committed for Catalyst
 build/
 *.log
 
