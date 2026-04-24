@@ -102,28 +102,31 @@ export async function parseJsonResponse(res) {
 /**
  * Resolve the correct API base URL for the current runtime.
  *
- *   · Dev (Vite at :8080)       → '' (relative) → Vite proxy forwards /api
- *                                  and /health to http://localhost:3001.
- *   · Catalyst Slate frontend   → The SPA is served from a Slate domain
- *                                  (*.onslate.in) which is completely separate
- *                                  from the Catalyst function host
- *                                  (*.catalystserverless.com). Relative paths
- *                                  would hit the Slate CDN, which has no API
- *                                  routes and returns 404.
+ * There are three environments:
  *
- *                                  Solution: inject the full function base URL
- *                                  at build time via VITE_API_BASE.
- *                                  e.g. https://<project>.catalystserverless.com/server/ds-analyzer
+ *   1. Local dev (Vite at :8080)
+ *      API_BASE = '' (empty string, i.e. same origin)
+ *      Vite proxy forwards /api/* and /health to http://localhost:3001.
  *
- *                                  At build time on Slate, set this env var to
- *                                  the function URL. In local dev it is empty,
- *                                  and the Vite proxy handles /api + /health.
+ *   2. Catalyst web-client hosting (*.catalystapps.com/app/)
+ *      The SPA and the function share the same origin.
+ *      Catalyst STRIPS the /server/ds-analyzer prefix before calling the
+ *      function handler, so from the SPA's perspective the API lives at
+ *      /server/ds-analyzer/api/... (same-origin, path-relative).
+ *      API_BASE = '/server/ds-analyzer'
+ *
+ *   3. Catalyst Slate (*.onslate.in) or any other cross-origin host
+ *      The function URL must be supplied as a full absolute URL via the
+ *      build-time env var VITE_API_BASE.
+ *      e.g. VITE_API_BASE=https://<project>.catalystapps.com/server/ds-analyzer
+ *      API_BASE = VITE_API_BASE (stripped of trailing slash)
+ *
+ * Priority: VITE_API_BASE (explicit) > runtime hostname detection > '' (dev).
  */
 function resolveApiBase() {
-  // VITE_API_BASE is injected at build time by Vite (import.meta.env).
-  // It must be the full origin + function path, e.g.:
-  //   https://creator-ds-analyser-123456.catalystserverless.com/server/ds-analyzer
-  // Trailing slashes are stripped for consistent URL construction.
+  // 1. Explicit build-time override — highest priority.
+  //    Set VITE_API_BASE in the Slate / CI build environment to the full
+  //    function URL when the SPA and function are on different origins.
   const buildTimeBase =
     typeof import.meta !== 'undefined' &&
     import.meta.env &&
@@ -131,7 +134,25 @@ function resolveApiBase() {
       ? import.meta.env.VITE_API_BASE.replace(/\/+$/, '')
       : '';
 
-  return buildTimeBase;
+  if (buildTimeBase) return buildTimeBase;
+
+  // 2. Runtime detection — Catalyst web-client hosting.
+  //    When running in a browser (not SSR / test) and not on localhost,
+  //    assume Catalyst web-client hosting where both the SPA and the
+  //    function share the same origin.  The function is reachable at
+  //    /server/ds-analyzer relative to the current origin.
+  if (
+    typeof window !== 'undefined' &&
+    window.location &&
+    window.location.hostname !== 'localhost' &&
+    window.location.hostname !== '127.0.0.1' &&
+    !/^192\.168\.|^10\.|^172\.(1[6-9]|2\d|3[01])\./.test(window.location.hostname)
+  ) {
+    return '/server/ds-analyzer';
+  }
+
+  // 3. Local dev — Vite proxy handles /api and /health.
+  return '';
 }
 
 const API_BASE = resolveApiBase();

@@ -5,18 +5,21 @@ import react from '@vitejs/plugin-react';
 // so the dev server binds to 8080. The API stays on 3001 and is reached
 // through the /api and /health proxies below.
 //
-// --- Production (Catalyst Slate) ---
-// Slate serves the SPA from a separate domain (*.onslate.in).
-// The Catalyst Advanced I/O function lives on *.catalystserverless.com.
-// Because these are different origins, all API calls MUST use a fully
-// qualified URL — relative paths like /api/inspect would hit the Slate
-// CDN and return 404.
+// --- Production (Catalyst web-client hosting) ---
+// The SPA is deployed via `catalyst.json` client.source → client/dist.
+// Catalyst serves the web client and the Advanced I/O function from the
+// SAME origin (*.catalystapps.com).  The function is accessible at the
+// path /server/ds-analyzer relative to that origin.
 //
-// Set VITE_API_BASE at Slate build time to the function's base URL:
-//   VITE_API_BASE=https://<project>.catalystserverless.com/server/ds-analyzer
+// http.js detects non-localhost hostnames at runtime and automatically
+// prepends /server/ds-analyzer — no build-time env var needed for the
+// standard Catalyst web-client hosting setup.
 //
-// In local dev, leave VITE_API_BASE unset; the Vite proxy forwards
-// /api and /health to http://localhost:3001 automatically.
+// --- Production (Catalyst Slate — cross-origin) ---
+// If the SPA is hosted on Slate (*.onslate.in), the function is on a
+// different origin.  Set VITE_API_BASE at Slate build time:
+//   VITE_API_BASE=https://<project>.catalystapps.com/server/ds-analyzer
+// http.js uses VITE_API_BASE when set, falling back to runtime detection.
 export default defineConfig({
   plugins: [react()],
   // base: './' makes asset paths in index.html relative (./assets/...)

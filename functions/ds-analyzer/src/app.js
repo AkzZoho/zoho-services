@@ -52,18 +52,21 @@ const analyzeLimiter =
       });
 
 // --- Routes ---
-// Catalyst Advanced I/O mounts functions at `/server/<function-name>/*`,
-// so the URL arriving at Express is e.g. `/server/ds-analyzer/api/inspect`.
-// Locally (and through Vite's proxy) the same route is reached as `/api/inspect`.
-// We register an Express Router with all routes once, then mount it at BOTH
-// paths so the function works in every environment without path rewriting.
+// The Catalyst platform STRIPS the function prefix before invoking the
+// handler.  A request to:
+//   https://<project>.catalystapps.com/server/ds-analyzer/api/inspect
+// arrives at Express as simply:
+//   /api/inspect
+//
+// The same path is used locally (via Vite proxy) so a single mount works
+// in every environment.  The old dual-mount at '/server/ds-analyzer' was
+// wrong and has been removed.
 const apiRouter = express.Router();
 apiRouter.use('/health', healthRoute);
 apiRouter.use('/api/inspect', analyzeLimiter, inspectRoute);
 apiRouter.use('/api/analyze', analyzeLimiter, analyzeRoute);
 
-app.use('/', apiRouter);                      // local / proxied dev
-app.use('/server/ds-analyzer', apiRouter);    // Catalyst production prefix
+app.use('/', apiRouter);
 
 // --- 404 ---
 app.use((req, res) => {
