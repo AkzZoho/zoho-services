@@ -8,7 +8,8 @@
     "start": "node src/index.js",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
-    "lint": "eslint src --ext .js"
+    "lint": "eslint src --ext .js",
+    "build": "echo 'No build step required for Node.js backend'"
   },
   "dependencies": {
     "express": "^4.19.2",
