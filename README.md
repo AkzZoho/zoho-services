@@ -61,6 +61,11 @@ See `.env.example` for required environment variables.
 catalyst deploy
 ```
 
+> ⚠️ **Before every commit**, read [`docs/DEPLOYMENT_LEARNINGS.md`](docs/DEPLOYMENT_LEARNINGS.md).
+> It covers the Golden Pre-Commit Checklist, Vite build-time env var gotchas,
+> `client/dist/` rebuild rules, CORS setup, and a step-by-step production 404
+> debugging playbook. **Most deployment bugs we've hit are already documented there.**
+
 ## 📝 Status
 
 **v0.1 — Scaffolding**. Awaiting sample `.ds` files to finalise the parser rules.

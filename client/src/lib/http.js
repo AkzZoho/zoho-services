@@ -145,18 +145,42 @@ function resolveApiBase() {
   }
 
   // 2. Runtime detection — Catalyst web-client hosting.
-  //    When running in a browser (not SSR / test) and not on localhost,
-  //    assume Catalyst web-client hosting where both the SPA and the
-  //    function share the same origin.  The function is reachable at
-  //    /server/ds-analyzer relative to the current origin.
-  if (
-    typeof window !== 'undefined' &&
-    window.location &&
-    window.location.hostname !== 'localhost' &&
-    window.location.hostname !== '127.0.0.1' &&
-    !/^192\.168\.|^10\.|^172\.(1[6-9]|2\d|3[01])\./.test(window.location.hostname)
-  ) {
-    return '/server/ds-analyzer';
+  //    When running in a browser (not SSR / test) and the app is hosted on
+  //    *.catalystapps.com, the SPA and function share the same origin so
+  //    the function is reachable at /server/ds-analyzer (same-origin path).
+  //
+  //    IMPORTANT: Catalyst Slate (*.onslate.in) is a DIFFERENT origin from
+  //    the function (*.catalystapps.com or *.catalystserverless.com). If we
+  //    are on Slate and VITE_API_BASE was not set at build time, we cannot
+  //    guess the function URL — log a clear error instead of silently calling
+  //    a wrong same-origin path.
+  if (typeof window !== 'undefined' && window.location) {
+    const { hostname } = window.location;
+
+    // Localhost / LAN — handled by Vite proxy (case 3 below).
+    const isLocal =
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1' ||
+      /^192\.168\.|^10\.|^172\.(1[6-9]|2\d|3[01])\./.test(hostname);
+
+    if (!isLocal) {
+      // On Slate the SPA and the function are on different origins.
+      // VITE_API_BASE MUST be set at build time (handled above in case 1).
+      // If we reach here on a *.onslate.in host it means the build was done
+      // without the env var — emit a loud console warning so it's diagnosable.
+      if (hostname.endsWith('.onslate.in')) {
+        console.error(
+          '[http.js] Running on Catalyst Slate but VITE_API_BASE was not set at build time. ' +
+            'API calls will fail. Rebuild the client with VITE_API_BASE=<your-function-url>.'
+        );
+        // Return empty string — calls will 404 but at least the error above
+        // tells the developer exactly what to fix.
+        return '';
+      }
+
+      // Catalyst web-client hosting (*.catalystapps.com) — same-origin.
+      return '/server/ds-analyzer';
+    }
   }
 
   // 3. Local dev — Vite proxy handles /api and /health.
