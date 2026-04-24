@@ -104,23 +104,34 @@ export async function parseJsonResponse(res) {
  *
  *   · Dev (Vite at :8080)       → '' (relative) → Vite proxy forwards /api
  *                                  and /health to http://localhost:3001.
- *   · Catalyst hosted frontend  → '/server/ds-analyzer' so requests resolve
- *                                  to the Advanced I/O function mount point
- *                                  (https://<proj>.catalystserverless.com
- *                                   /server/ds-analyzer/api/inspect).
+ *   · Catalyst Slate frontend   → The SPA is served from a Slate domain
+ *                                  (*.onslate.in) which is completely separate
+ *                                  from the Catalyst function host
+ *                                  (*.catalystserverless.com). Relative paths
+ *                                  would hit the Slate CDN, which has no API
+ *                                  routes and returns 404.
  *
- * Detection rule: any non-localhost hostname is treated as a hosted
- * deployment. This keeps local builds (`vite preview`) working too.
+ *                                  Solution: inject the full function base URL
+ *                                  at build time via VITE_API_BASE.
+ *                                  e.g. https://<project>.catalystserverless.com/server/ds-analyzer
+ *
+ *                                  At build time on Slate, set this env var to
+ *                                  the function URL. In local dev it is empty,
+ *                                  and the Vite proxy handles /api + /health.
  */
 function resolveApiBase() {
-  if (typeof window === 'undefined') return '';
-  const { hostname } = window.location;
-  const isLocal =
-    hostname === 'localhost' ||
-    hostname === '127.0.0.1' ||
-    hostname === '0.0.0.0' ||
-    hostname.endsWith('.local');
-  return isLocal ? '' : '/server/ds-analyzer';
+  // VITE_API_BASE is injected at build time by Vite (import.meta.env).
+  // It must be the full origin + function path, e.g.:
+  //   https://creator-ds-analyser-123456.catalystserverless.com/server/ds-analyzer
+  // Trailing slashes are stripped for consistent URL construction.
+  const buildTimeBase =
+    typeof import.meta !== 'undefined' &&
+    import.meta.env &&
+    import.meta.env.VITE_API_BASE
+      ? import.meta.env.VITE_API_BASE.replace(/\/+$/, '')
+      : '';
+
+  return buildTimeBase;
 }
 
 const API_BASE = resolveApiBase();
