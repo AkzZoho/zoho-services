@@ -9,7 +9,7 @@
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
     "lint": "eslint src --ext .js",
-    "build": "echo 'No build step required for Node.js backend'"
+    "build": "rm -rf dist && cp -r src/. dist/"
   },
   "dependencies": {
     "express": "^4.19.2",
