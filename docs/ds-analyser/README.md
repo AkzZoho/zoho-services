@@ -15,6 +15,7 @@ duplicated between tools.
 
 | File | Read it for |
 |---|---|
+| [`SKILL.md`](./SKILL.md) | Agent-facing capability guide — when to use the skill, inputs/outputs, exact invocation (`POST /api/inspect`), config, and troubleshooting. **Start here to *use* the tool.** |
 | [`application.md`](./application.md) | The full application documentation — what the tool does, why, architecture, modules, API contract, security posture, change-log. **Start here for any code change in this tool.** |
 | [`architecture.md`](./architecture.md) | Higher-level request-flow diagram + design rationale (router pattern, rules-as-MD, etc.). |
 | [`flowchart.md`](./flowchart.md) | Functional flow chart, sequence diagrams (Mermaid), error/fallback paths, frontend state machine. |
