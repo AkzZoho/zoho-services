@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel in-progress runs for the same ref when new commits are pushed.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Lint & Test (Node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      # Installs root + both workspaces (client, functions/ds-analyzer) in one pass.
+      - name: Install dependencies
+        run: npm ci
+
+      # --- Backend API (functions/ds-analyzer) ---
+      - name: Lint backend
+        run: npm --prefix functions/ds-analyzer run lint
+
+      - name: Test backend (Jest)
+        run: npm --prefix functions/ds-analyzer test
+
+      # --- Client (React + Vite) ---
+      - name: Lint client
+        run: npm --prefix client run lint
+
+      - name: Test client (node:test)
+        run: npm --prefix client test
+
+      - name: Build client
+        run: npm --prefix client run build

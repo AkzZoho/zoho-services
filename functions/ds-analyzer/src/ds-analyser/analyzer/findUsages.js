@@ -98,9 +98,22 @@ function clipLineAroundMatch(line, matchStart, matchLen) {
   let start = Math.max(0, matchStart - halfBudget);
   let end = Math.min(line.length, matchStart + matchLen + halfBudget);
 
-  // Snap start/end to nearest whitespace for readability when possible.
-  while (start > 0 && /\S/.test(line[start])) start -= 1;
-  while (end < line.length && /\S/.test(line[end])) end += 1;
+  // Snap start/end to the nearest whitespace for readability — but only nudge
+  // a BOUNDED number of characters. On a line with no whitespace near the
+  // budget edge (e.g. a single 1600-char minified statement) an unbounded
+  // snap would walk all the way to the line ends and defeat the clipping
+  // entirely, so we cap the nudge distance.
+  const SNAP_LIMIT = 32;
+  let snapped = 0;
+  while (start > 0 && /\S/.test(line[start]) && snapped < SNAP_LIMIT) {
+    start -= 1;
+    snapped += 1;
+  }
+  snapped = 0;
+  while (end < line.length && /\S/.test(line[end]) && snapped < SNAP_LIMIT) {
+    end += 1;
+    snapped += 1;
+  }
 
   const prefix = start > 0 ? '… ' : '';
   const suffix = end < line.length ? ' …' : '';
@@ -612,6 +625,10 @@ function findUsages(overview, oldValue, options = {}) {
       break;
     }
     const remaining = opts.maxTotalOccurrences - occurrences.length;
+    // The effective cap for this entity is the smaller of the per-entity
+    // limit and whatever global budget is left. When an entity fills this
+    // cap, more matches may exist that we didn't collect — i.e. the result
+    // is truncated (handled below after the scan).
     const perEntityCap = Math.min(opts.maxOccurrencesPerEntity, remaining);
     const matches = scanEntity({
       source: ent.source,
@@ -631,8 +648,10 @@ function findUsages(overview, oldValue, options = {}) {
         displayName: ent.displayName,
         matches,
       });
-      // If this entity itself was capped, flag truncation.
-      if (matches.length === opts.maxOccurrencesPerEntity) truncated = true;
+      // Flag truncation when this entity filled its effective cap — whether
+      // that cap came from the per-entity limit or from the remaining global
+      // budget. In both cases additional matches may exist that we skipped.
+      if (matches.length >= perEntityCap) truncated = true;
     }
   }
 

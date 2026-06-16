@@ -43,13 +43,19 @@ const TOKEN = `(?:${QUOTED}|${BARE})`;
 
 // Verbs that introduce a rename. Anchored with \b so "exchange" doesn't match
 // "change". Order matters only for readability — we run them all.
+// NOTE: We deliberately do NOT append a trailing `\b` after the final TOKEN.
+// A quoted token ends in a quote character (`"`, `'`, `` ` ``) which is a
+// non-word character, so a trailing `\b` would fail to match at end-of-input
+// or before whitespace — breaking every quoted rename (and any subsequent
+// match in a multi-rename prompt). The leading `\b` on the verb is what
+// guards against false positives like "exchange" matching "change".
 const PATTERNS = [
   // change X to Y   |   rename X to Y   |   update X to Y
-  new RegExp(`\\b(?:change|rename|update)\\s+${TOKEN}\\s+to\\s+${TOKEN}\\b`, 'gi'),
+  new RegExp(`\\b(?:change|rename|update)\\s+${TOKEN}\\s+to\\s+${TOKEN}`, 'gi'),
   // replace X with Y
-  new RegExp(`\\breplace\\s+${TOKEN}\\s+with\\s+${TOKEN}\\b`, 'gi'),
+  new RegExp(`\\breplace\\s+${TOKEN}\\s+with\\s+${TOKEN}`, 'gi'),
   // swap X for Y    |   swap X with Y
-  new RegExp(`\\bswap\\s+${TOKEN}\\s+(?:for|with)\\s+${TOKEN}\\b`, 'gi'),
+  new RegExp(`\\bswap\\s+${TOKEN}\\s+(?:for|with)\\s+${TOKEN}`, 'gi'),
 ];
 
 /**
