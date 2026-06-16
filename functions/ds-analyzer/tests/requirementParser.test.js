@@ -1,4 +1,4 @@
-const { parseFromUrl } = require('../src/parsers/requirementParser');
+const { parseFromUrl } = require('../src/ds-analyser/parsers/requirementParser');
 
 describe('requirementParser.parseFromUrl (SSRF guards)', () => {
   test('rejects non-http protocol', async () => {

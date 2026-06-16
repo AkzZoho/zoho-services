@@ -9,8 +9,8 @@
  *   3. Returns the *expected* status code for well-defined failure modes
  *      (missing file → 400, unknown route → 404, etc.).
  *
- * Root cause history: when the Catalyst/Express backend was down, the
- * Vite dev proxy fell through to the SPA's `index.html`, which the client
+ * Root cause history: when the Node/Express backend was down, the Vite
+ * dev proxy fell through to the SPA's `index.html`, which the client
  * then tried to `JSON.parse()` — producing the "HTML instead of JSON"
  * error. These tests lock down the contract end-to-end against the
  * Express app directly (via supertest), so the server itself is never
@@ -42,7 +42,6 @@ describe('Route reachability & JSON contract', () => {
     // Force deterministic stub LLM path so tests never depend on network/keys.
     delete process.env.OPENAI_API_KEY;
     delete process.env.ANTHROPIC_API_KEY;
-    delete process.env.ZOHO_CATALYST_AI_TOKEN;
   });
 
   // ---- Health ----------------------------------------------------------
@@ -121,7 +120,7 @@ describe('Route reachability & JSON contract', () => {
   // rewrites (e.g. strips `../`) before the request reaches the server.
   // The helper is the authoritative defence, so we pin it down directly.
   describe('inspect.isAllowedDs() allowlist', () => {
-    const { isAllowedDs } = require('../src/routes/inspect')._internal;
+    const { isAllowedDs } = require('../src/ds-analyser/routes/inspect')._internal;
 
     test.each([
       'app.ds',
@@ -218,6 +217,57 @@ describe('Route reachability & JSON contract', () => {
     expect(res.text).not.toMatch(/<!doctype html>|<html/i);
   });
 
+  // ---- /api/extract-scope ---------------------------------------------------
+
+  test('POST /api/extract-scope is reachable (not 404) and returns JSON', async () => {
+    // With no LLM keys configured the stub fires → 501 useFallback (JSON).
+    const res = await request(app)
+      .post('/api/extract-scope')
+      .send({ brdText: 'Build a simple CRM.' })
+      .set('Content-Type', 'application/json');
+
+    expect(res.status).not.toBe(404);
+    expect(res.headers['content-type']).toMatch(JSON_CT);
+    // Either 200 (real LLM) or 501 (stub path) — both are valid here.
+    expect([200, 501]).toContain(res.status);
+  });
+
+  test('POST /api/extract-scope returns JSON 400 when brdText is missing', async () => {
+    const res = await request(app)
+      .post('/api/extract-scope')
+      .send({})
+      .set('Content-Type', 'application/json');
+
+    expect(res.status).toBe(400);
+    expect(res.headers['content-type']).toMatch(JSON_CT);
+    expect(res.body).toHaveProperty('error');
+  });
+
+  // ---- /api/apply-prompt ---------------------------------------------------
+
+  test('POST /api/apply-prompt is reachable (not 404) and returns JSON', async () => {
+    // Stub path → 501 useFallback (JSON).
+    const res = await request(app)
+      .post('/api/apply-prompt')
+      .send({ instruction: 'add a Vendor form', stepId: 'step1' })
+      .set('Content-Type', 'application/json');
+
+    expect(res.status).not.toBe(404);
+    expect(res.headers['content-type']).toMatch(JSON_CT);
+    expect([200, 501]).toContain(res.status);
+  });
+
+  test('POST /api/apply-prompt returns JSON 400 when instruction is missing', async () => {
+    const res = await request(app)
+      .post('/api/apply-prompt')
+      .send({ stepId: 'step1' })
+      .set('Content-Type', 'application/json');
+
+    expect(res.status).toBe(400);
+    expect(res.headers['content-type']).toMatch(JSON_CT);
+    expect(res.body).toHaveProperty('error');
+  });
+
   test('Unknown route returns JSON 404 (not HTML)', async () => {
     const res = await request(app).get('/api/does-not-exist');
     expect(res.status).toBe(404);
@@ -235,20 +285,14 @@ describe('Route reachability & JSON contract', () => {
     expect(res.text).not.toMatch(/<!doctype html>|<html/i);
   });
 
-  // ---- Catalyst Advanced I/O routing contract ----------------------------
+  // ---- Unknown-path contract ---------------------------------------------
   //
-  // The Catalyst platform STRIPS the /server/<function-name> prefix before
-  // invoking the Advanced I/O handler, so Express always receives paths
-  // starting with /api/... or /health — never /server/ds-analyzer/...
-  //
-  // These tests confirm that the stripped paths are what the server handles,
-  // and that no /server/ds-analyzer mount leaks unexpected behaviour.
+  // Any unknown URL must still return JSON (the 404 middleware), never
+  // HTML — that's what protects the SPA from the "JSON.parse(HTML)" class
+  // of bug regardless of what reverse-proxy fronts the API.
 
-  test('/server/ds-analyzer/anything returns JSON 404 (prefix is stripped by Catalyst before reaching Express)', async () => {
-    const res = await request(app).get('/server/ds-analyzer/api/inspect');
-    // Express receives /api/inspect (stripped) — a GET on /api/inspect
-    // has no handler so it falls through to the 404 middleware.
-    // The point is it never serves HTML, and the 404 is JSON.
+  test('Unknown deep path returns JSON 404 (never HTML)', async () => {
+    const res = await request(app).get('/api/does/not/exist');
     expect([404, 405]).toContain(res.status);
     expect(res.headers['content-type']).toMatch(JSON_CT);
     expect(res.text).not.toMatch(/<!doctype html>|<html/i);
@@ -257,9 +301,7 @@ describe('Route reachability & JSON contract', () => {
   // ---- Helmet / CORS security headers ------------------------------------
   //
   // Every response (success AND error) must carry the correct security
-  // headers so Catalyst's CDN doesn't strip or override them in a way
-  // that breaks the SPA. These are regression tests — any accidental
-  // helmet mis-configuration will be caught here before it reaches prod.
+  // headers regardless of which reverse-proxy / host fronts the API.
 
   test('Success response includes X-Content-Type-Options: nosniff', async () => {
     const res = await request(app).get('/health');

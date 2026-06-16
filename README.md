@@ -1,71 +1,89 @@
-# Creator DS Analyser
+# Zoho Services Tools
 
-A tool to analyse Zoho Creator `.ds` exports against a requirement document (PDF / DOCX / Zoho Sheet link) and produce a **dual-view change report**:
+A growing collection of internal tools for the Zoho Services team. The suite is
+a plain **Node + Express + Vite** monorepo — runs locally, deploys to any host
+(VPS, Render, Railway, Fly, Vercel, Cloudflare, your own box).
 
-- 🧑‍💼 **PM View** — plain-English summary of what will change
-- 👨‍💻 **Developer View** — exact forms, fields, workflows, Deluge scripts to add/modify
+## 🧰 Tools
 
-Hosted on **Zoho Catalyst**.
-
----
+| ID | Name | Status | Description |
+|---|---|---|---|
+| `ds-analyser` | **Creator DS Analyser** | Stable | Upload a Zoho Creator `.ds` export → instant schema breakdown, performance audit, AI-powered change planning. |
+| `tech-scope` | **Technical Scope Creator** | Beta | Upload a BRD (PDF/DOCX/MD/TXT) → 5-step reviewable technical scope, exported as a packed PDF with embedded flowchart. |
 
 ## 🏗️ Architecture
 
 ```
-Creator - DS Analyser/
-├── client/                 # React + Vite + Tailwind frontend
+Zoho_Services/                    # workspace root
+├── client/                       # React + Vite + Tailwind frontend (all tools)
+│   └── src/tools/
+│       ├── ds-analyser/          # Tool 1 — DS Analyser SPA
+│       └── tech-scope/           # Tool 2 — Tech Scope Creator SPA
 ├── functions/
-│   └── ds-analyzer/        # Catalyst Advanced I/O function (Node.js/Express)
+│   └── ds-analyzer/              # Node + Express API (all tools)
 │       ├── src/
-│       │   ├── parsers/    # .ds, pdf, docx, zoho-sheet parsers
-│       │   ├── llm/        # Multi-provider LLM router
-│       │   ├── analyzer/   # Change-detection orchestration
-│       │   └── routes/     # Express routes
-│       └── tests/          # Unit + integration tests
-├── rules/                  # Editable MD rules for parser + LLM
-│   ├── ds-parser-rules.md
-│   └── llm-prompt-rules.md
-├── samples/                # Place sample .ds + requirement docs here
-└── catalyst.json
+│       │   ├── ds-analyser/      # routes + parsers + analyser
+│       │   ├── tech-scope/       # routes
+│       │   ├── shared/llm/       # multi-provider LLM router
+│       │   ├── app.js            # Express app
+│       │   └── server.js         # entrypoint
+│       └── tests/                # Jest unit + integration tests
+├── docs/                         # Tool-segregated documentation
+└── start-local.sh                # one-shot dev launcher
 ```
 
 ## 🧠 LLM Router
 
 Automatically picks the best provider per task:
 
-| Task | Provider |
+| Task | Provider preference |
 |---|---|
-| Long-doc comprehension | Anthropic Claude |
-| Structured JSON extraction | OpenAI GPT-4o |
-| PM-friendly summaries | Zoho Zia (Catalyst AI) |
-| Fallback (no keys) | Local stub |
+| Long-doc comprehension | Anthropic → OpenAI → stub |
+| Structured JSON extraction | OpenAI → Anthropic → stub |
+| Fallback (no keys) | Local stub (deterministic placeholder JSON) |
+
+See [`functions/ds-analyzer/LLM_PROVIDERS.md`](functions/ds-analyzer/LLM_PROVIDERS.md).
 
 ## 🚀 Quick Start
 
 ```bash
-# Install dependencies
+# 1. Install everything
 npm run install:all
 
-# Run backend locally (Catalyst function emulator)
-npm run dev:server
+# 2. Copy env templates
+cp .env.example .env
+cp client/.env.example client/.env
+cp functions/ds-analyzer/.env.example functions/ds-analyzer/.env
 
-# Run frontend
-npm run dev:client
+# 3. Start API + client together
+./start-local.sh
 ```
 
-See `.env.example` for required environment variables.
+- API → http://localhost:3001/health
+- Client → http://localhost:8080
 
-## 📤 Deployment
+## 🧪 Testing
 
 ```bash
-catalyst deploy
+# Backend unit + integration (Jest)
+npm test
 ```
 
-> ⚠️ **Before every commit**, read [`docs/DEPLOYMENT_LEARNINGS.md`](docs/DEPLOYMENT_LEARNINGS.md).
-> It covers the Golden Pre-Commit Checklist, Vite build-time env var gotchas,
-> `client/dist/` rebuild rules, CORS setup, and a step-by-step production 404
-> debugging playbook. **Most deployment bugs we've hit are already documented there.**
+## 📤 Deployment (generic Node host)
+
+1. `npm run build` → produces `client/dist/` (static SPA).
+2. Run `node functions/ds-analyzer/src/server.js` on your host (or `pm2 start`,
+   Docker, systemd, whatever).
+3. Reverse-proxy `/api/*` and `/health` to the Node process; serve
+   everything else from `client/dist/`.
+4. Set env vars on the host: `OPENAI_API_KEY` (or `ANTHROPIC_API_KEY`),
+   `PORT`, `CORS_ALLOWED_ORIGINS`, and the `VITE_*` build-time vars before
+   running `npm run build`.
+
+If the SPA and the API end up on different origins, set `VITE_API_BASE` to
+the absolute API URL at build time and add the SPA origin to
+`CORS_ALLOWED_ORIGINS` on the API.
 
 ## 📝 Status
 
-**v0.1 — Scaffolding**. Awaiting sample `.ds` files to finalise the parser rules.
+**v0.3 — Active**. Suite trimmed to DS Analyser + Tech Scope Creator only.

@@ -1,4 +1,4 @@
-const { parseDs, _internal } = require('../src/parsers/dsParser');
+const { parseDs, _internal } = require('../src/ds-analyser/parsers/dsParser');
 const AdmZip = require('adm-zip');
 
 describe('dsParser', () => {

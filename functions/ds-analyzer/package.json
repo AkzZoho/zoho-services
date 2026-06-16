@@ -1,15 +1,14 @@
 {
   "name": "ds-analyzer",
   "version": "0.1.0",
-  "description": "Catalyst Advanced I/O function — parses Zoho Creator .ds + requirement docs and produces a change list",
-  "main": "src/index.js",
+  "description": "Node + Express API — parses Zoho Creator .ds + requirement docs and produces a change list. Powers DS Analyser and Tech Scope Creator.",
+  "main": "src/server.js",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "start": "node src/index.js",
+    "start": "node src/server.js",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
-    "lint": "eslint src --ext .js",
-    "build": "rm -rf dist && cp -r src/. dist/"
+    "lint": "eslint src --ext .js"
   },
   "dependencies": {
     "express": "^4.19.2",

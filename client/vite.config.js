@@ -1,30 +1,26 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Zoho Code IDE preview only proxies port 8080 (HTTP) / 8443 (HTTPS),
-// so the dev server binds to 8080. The API stays on 3001 and is reached
-// through the /api and /health proxies below.
+// Dev server binds to 8080 (Zoho Code IDE preview only proxies 8080 HTTP /
+// 8443 HTTPS). The API stays on 3001 and is reached through the /api and
+// /health proxies below.
 //
-// --- Production (Catalyst web-client hosting) ---
-// The SPA is deployed via `catalyst.json` client.source → client/dist.
-// Catalyst serves the web client and the Advanced I/O function from the
-// SAME origin (*.catalystapps.com).  The function is accessible at the
-// path /server/ds-analyzer relative to that origin.
+// --- Production ---
+// Build the SPA with `npm run build` (outputs to client/dist). Serve those
+// static files from any host (Nginx, Vercel, Netlify, Cloudflare Pages, …)
+// and route /api and /health to the Node API at functions/ds-analyzer.
 //
-// http.js detects non-localhost hostnames at runtime and automatically
-// prepends /server/ds-analyzer — no build-time env var needed for the
-// standard Catalyst web-client hosting setup.
+// If the SPA and the API are on the SAME origin (preferred — same domain,
+// reverse proxy splits paths), leave VITE_API_BASE empty.
 //
-// --- Production (Catalyst Slate — cross-origin) ---
-// If the SPA is hosted on Slate (*.onslate.in), the function is on a
-// different origin.  Set VITE_API_BASE at Slate build time:
-//   VITE_API_BASE=https://<project>.catalystapps.com/server/ds-analyzer
-// http.js uses VITE_API_BASE when set, falling back to runtime detection.
+// If they are on DIFFERENT origins, set VITE_API_BASE at build time to the
+// absolute API URL, e.g.
+//   VITE_API_BASE=https://api.example.com
+// `client/src/tools/ds-analyser/lib/http.js` picks this up automatically.
 export default defineConfig({
   plugins: [react()],
-  // base: './' makes asset paths in index.html relative (./assets/...)
-  // instead of root-absolute (/assets/...).  Catalyst Slate's CDN serves
-  // the bundle from its own origin so absolute paths would 404.
+  // base: './' makes asset paths in index.html relative (./assets/...) which
+  // is friendlier when serving the bundle from a CDN or sub-path.
   base: './',
   server: {
     port: 8080,

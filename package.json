@@ -1,8 +1,8 @@
 {
-  "name": "creator-ds-analyser",
-  "version": "0.1.0",
+  "name": "zoho-services-tools",
+  "version": "0.3.0",
   "private": true,
-  "description": "Zoho Creator DS + Requirement document analyser (Catalyst-hosted)",
+  "description": "Zoho Services Tools — multi-tool suite (DS Analyser, Tech Scope Creator) running on plain Node + Vite.",
   "workspaces": [
     "client",
     "functions/ds-analyzer"

@@ -1,4 +1,4 @@
-const { AnalysisResult } = require('../src/analyzer/schema');
+const { AnalysisResult } = require('../src/ds-analyser/analyzer/schema');
 
 describe('AnalysisResult schema', () => {
   test('accepts minimal valid payload', () => {

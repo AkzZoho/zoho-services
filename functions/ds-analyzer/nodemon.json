@@ -1,0 +1,13 @@
+{
+  "//": "Nodemon config — keep server reloads tied to source changes only.",
+  "watch": ["src"],
+  "ext": "js,mjs,cjs,json",
+  "ignore": [
+    "data/**",
+    "tests/**",
+    "coverage/**",
+    "**/*.test.js",
+    "**/*.preview.txt"
+  ],
+  "delay": "200"
+}

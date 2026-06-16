@@ -284,6 +284,73 @@ export function Spinner({ size = 20, className = '', ...rest }) {
   );
 }
 
+/* ---------- Auth / admin ---------- */
+export function Lock(p) {
+  return (
+    <svg {...base(p)}>
+      <rect x="5" y="11" width="14" height="10" rx="2" />
+      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+    </svg>
+  );
+}
+
+export function ShieldCheck(p) {
+  return (
+    <svg {...base(p)}>
+      <path d="M12 3 4 7v5c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5V7l-8-4Z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  );
+}
+
+export function Eye(p) {
+  return (
+    <svg {...base(p)}>
+      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
+export function EyeOff(p) {
+  return (
+    <svg {...base(p)}>
+      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-10-7-10-7a18.45 18.45 0 0 1 5.06-5.94" />
+      <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 10 7 10 7a18.5 18.5 0 0 1-2.16 3.19" />
+      <path d="m2 2 20 20" />
+    </svg>
+  );
+}
+
+export function LogOut(p) {
+  return (
+    <svg {...base(p)}>
+      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+      <path d="m16 17 5-5-5-5" />
+      <path d="M21 12H9" />
+    </svg>
+  );
+}
+
+/* ---------- Navigation ---------- */
+export function ArrowLeft(p) {
+  return (
+    <svg {...base(p)}>
+      <path d="M19 12H5" />
+      <path d="m12 19-7-7 7-7" />
+    </svg>
+  );
+}
+
+export function ArrowRight(p) {
+  return (
+    <svg {...base(p)}>
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </svg>
+  );
+}
+
 /* Convenience default export — `import Icon from './Icons'; <Icon.Upload />` */
 const Icon = {
   LogoMark,
@@ -309,5 +376,14 @@ const Icon = {
   Code,
   Copy,
   Spinner,
+  // Auth / admin
+  Lock,
+  ShieldCheck,
+  Eye,
+  EyeOff,
+  LogOut,
+  // Navigation
+  ArrowLeft,
+  ArrowRight,
 };
 export default Icon;

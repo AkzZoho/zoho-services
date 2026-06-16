@@ -1,0 +1,74 @@
+# =============================================================================
+# .zcodeignore — files excluded from Zoho Code IDE guide/overview generation
+# =============================================================================
+# Mirrors .gitignore for build artefacts, plus excludes large binary docs and
+# lockfiles that would blow past the guide generator's 750 KB input budget.
+
+# --- Dependencies & build output --------------------------------------------
+node_modules/
+**/node_modules/
+build/
+**/build/
+coverage/
+.nyc_output/
+dist/
+**/dist/
+
+# --- Playwright -------------------------------------------------------------
+test-results/
+playwright-report/
+playwright/.cache/
+
+# --- Lockfiles (large, low signal for guide generation) ---------------------
+**/package-lock.json
+**/yarn.lock
+**/pnpm-lock.yaml
+**/npm-shrinkwrap.json
+
+# --- Binary documentation assets --------------------------------------------
+**/*.pdf
+**/*.docx
+**/*.doc
+**/*.xlsx
+**/*.xls
+**/*.pptx
+**/*.ppt
+
+# --- Images & media ---------------------------------------------------------
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.bmp
+**/*.svg
+**/*.ico
+**/*.webp
+**/*.mp4
+**/*.mov
+**/*.zip
+**/*.tar
+**/*.tar.gz
+**/*.tgz
+
+# --- Environment & secrets -------------------------------------------------
+.env
+.env.local
+.env.*.local
+**/.env
+!**/.env.example
+
+# --- Logs & temp ------------------------------------------------------------
+*.log
+**/*.log
+tmp/
+uploads/
+
+# --- Editor / OS ------------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# --- Project-specific large assets ------------------------------------------
+Sample User Guide/
+functions/ds-analyzer/data/

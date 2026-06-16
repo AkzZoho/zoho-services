@@ -18,7 +18,6 @@ describe('API', () => {
   test('POST /api/inspect returns ok + technicalScope with forms array', async () => {
     delete process.env.OPENAI_API_KEY;
     delete process.env.ANTHROPIC_API_KEY;
-    delete process.env.ZOHO_CATALYST_AI_TOKEN;
 
     const dsBuf = buildDsZip({
       application: { name: 'Demo' },
@@ -43,7 +42,7 @@ describe('API', () => {
   });
 
   test('buildRelationships extracts lookup / baseForm / attached edges', () => {
-    const { _internal } = require('../src/analyzer/inspect');
+    const { _internal } = require('../src/ds-analyser/analyzer/inspect');
     const ds = {
       forms: [
         { name: 'Customers', fields: [] },
@@ -80,7 +79,6 @@ describe('API', () => {
     // Force stub path
     delete process.env.OPENAI_API_KEY;
     delete process.env.ANTHROPIC_API_KEY;
-    delete process.env.ZOHO_CATALYST_AI_TOKEN;
 
     const zip = new AdmZip();
     zip.addFile(
