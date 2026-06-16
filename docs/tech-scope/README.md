@@ -16,6 +16,7 @@ duplicated between tools.
 
 | File | Read it for |
 |---|---|
+| [`SKILL.md`](./SKILL.md) | **Agent-facing capability guide** — when to use this skill, inputs, how to invoke (wizard + optional AI routes), the prompt-DSL, outputs, troubleshooting. **Start here to *use* the tool.** |
 | [`overview.md`](./overview.md) | Tool intent · locked tech stack · prompt-DSL grammar · BRD-parser heuristics · gotchas · round-trip plan with DS Analyser. **Start here for any code change in this tool.** |
 | [`forms-and-lookups.md`](./forms-and-lookups.md) | Non-negotiable rules for how Forms and Lookups must appear in the generated scope (every dropdown is its own form, etc.). |
 | [`steps/`](./steps/) | One file per wizard step. Each step file documents the entities surfaced, the prompt-DSL ops that target it, and the on-screen rendering. |
